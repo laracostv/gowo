@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Gowo - Validação</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../../assets/brand/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../../assets/brand/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../../assets/brand/icons/favicon-16x16.png">
+    <link rel="manifest" href="../../../../../assets/brand/icons/site.webmanifest">
+    <link rel="mask-icon" href="../../../../../assets/brand/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="../../../../../apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!--FONTS-->
+    <!--ICON PACK-->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="../../../../../public/css/css_reset.css">
+    <link rel="stylesheet" href="../../../../../public/css/default.css">
+    <link rel="stylesheet" href="../../../../../public/css/views/login.css">
+    <link rel="stylesheet" href="../../../../../public/css/views/signup.css">
+    <link rel="stylesheet" href="../../../../../public/css/grid.css">
+    <link rel="stylesheet" href="../../../../../public/css/views/welcome.css">
+    <!--JS-->
+    <script src="../../../../../public/js/vanilla-masker.js"></script>
+    <script src="../../../../../public/js/initial.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="xs-12 sm-12 md-12 lg-12 xg-12 total-height">
+                <center>
+                    <div class="white_box">
+                        <h1>Confirmação</h1>
+                        <div class="confirm-line"></div>
+                        <p>Enviamos um e-mail para <b>usua*****@gmail.com</b> com um código de verificação</p>
+                        <div class="input-verification-style">
+                            <input id="code1" class="ver-field" autocomplete="none" type="cel" maxlength="1"
+                                onkeydown="focus_input(1)">
+                        </div>
+                        <div class="input-verification-style">
+                            <input id="code2" class="ver-field" autocomplete="none" type="cel" maxlength="1"
+                                onkeydown="focus_input(2)">
+                        </div>
+                        <div class="input-verification-style">
+                            <input id="code3" class="ver-field" autocomplete="none" type="cel" maxlength="1"
+                                onkeydown="focus_input(3)">
+                        </div>
+                        <div class="spacer-field">-</div>
+                        <div class="input-verification-style">
+                            <input id="code4" class="ver-field" autocomplete="none" type="cel" maxlength="1"
+                                onkeydown="focus_input(4)">
+                        </div>
+                        <div class="input-verification-style">
+                            <input id="code5" class="ver-field" autocomplete="none" type="cel" maxlength="1"
+                                onkeydown="focus_input(5)">
+                        </div>
+                        <div class="input-verification-style">
+                            <input id="code6" class="ver-field" autocomplete="none" type="cel" maxlength="1"
+                                onkeydown="focus_input(6)">
+                        </div>
+                        <button class="login-btn-submit">Verificar</button>
+                        <p class="send-again">Não recebeu?</p>
+                        <div style="display: inline-block; color: #00a39b; cursor: pointer;">Enviar novamente</div>
+
+                    </div>
+                </center>
+            </div>
+        </div>
+    </div>
+    <script>
+        feather.replace()
+        VMasker(document.getElementById("code1")).maskPattern('9');
+        VMasker(document.getElementById("code2")).maskPattern('9');
+        VMasker(document.getElementById("code3")).maskPattern('9');
+        VMasker(document.getElementById("code4")).maskPattern('9');
+        VMasker(document.getElementById("code5")).maskPattern('9');
+        VMasker(document.getElementById("code6")).maskPattern('9');
+        var keyPressed = 0;
+        var id_input = '';
+        var empty_char = '';
+
+        function what_pressed() {
+            keyPressed = event.keyCode;
+            console.log(keyPressed);
+        }
+
+        function focus_input(id_set) {
+            //console.log(event.keyCode)
+
+            if (event.keyCode == 8) {
+                if (id_set > 1) {
+                    //console.log("voltou")
+                    id_input = "code" + id_set
+                    document.getElementById(id_input).value = '';
+                    id_input = "code" + (id_set - 1)
+                    document.getElementById(id_input).focus();
+                    count_back = 0
+                }
+            }
+
+            if (event.keyCode > 47 && event.keyCode < 58 && id_set < 6) {
+                count_back = 0
+                id_input = "code" + (id_set - 1)
+                document.getElementById(id_input).value = event.key;
+                id_input = "code" + (id_set + 1)
+                document.getElementById(id_input).focus();
+                //console.log('next')
+            }
+            if (event.keyCode > 96 && event.keyCode < 106 && id_set < 6) {
+                count_back = 0
+                id_input = "code" + id_set
+                document.getElementById(id_input).value = event.key;
+                id_input = "code" + (id_set + 1)
+                document.getElementById(id_input).focus();
+                document.getElementById(id_input).value = " ";
+                //console.log('next')
+            }
+        }
+    </script>
+</body>
+
+</html>

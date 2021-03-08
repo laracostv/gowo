@@ -1,0 +1,122 @@
+body{
+    background-image: url('../../../assets/images/login-background-gowo.png');
+    height: 100%;
+}
+
+h1{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+}
+
+.login-logo{
+    max-height: 80px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.login-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 30px;
+}
+
+.login-line{
+    height: 6px;
+    width: 80px;
+    margin-top: 10px;
+    background-color: #00a39b;
+    margin-bottom: 40px;
+}
+
+.login-desc{
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    color: #696969
+}
+
+.login-form{
+    height: 55px;
+    width: 100%;
+    outline: 0;
+    font-size: 20px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    margin-top: 15px;
+    text-indent: 25px;
+    font-family: "Poppins", sans-serif;
+    color: #646464;
+    border: 3px solid #f1f1f1;
+}
+
+.login-btn-submit{
+    height: 50px;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    background-color: #00a39b;
+    border: 2px solid #00a39b;
+    outline: 0px;
+    cursor: pointer;
+}
+
+.login-btn-submit:hover{
+    background-color: #ffffff;
+    border: 2px solid #00a39b;
+    color: #00a39b;
+    transition: all 0.2s ease;
+}
+
+.login-show-password{
+    display: relative;
+    margin-top: -40px;
+}
+
+.login-signup-text{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin-top: 60px
+}
+
+.login-signup-btn{
+    height: 35px;
+    padding-left: 35px;
+    padding-right: 35px;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    outline: 0;
+    margin-top: 15px;
+    background: #EFEFEF;
+}
+
+#partner_form select{
+    background: url(../../../assets/images/ui/chevron-down.svg);
+    background-color: #efefef;
+    background-repeat: no-repeat;
+    background-position: 96%;
+    width: 101%;
+    height: 60px;
+}
+
+@media (max-width: 768px) {
+    body{
+        background:#ffffff;
+        height: 100%;
+    }
+
+    .login-logo{
+        max-height: 50px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+}

@@ -1,0 +1,49 @@
+.confirm-line{
+    height: 6px;
+    width: 120px;
+    margin-top: 10px;
+    background-color: #00a39b;
+    margin-bottom: 40px;
+}
+
+.send-again{
+    margin-top: 25px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.white_box{
+    max-width: 400px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.input-verification-style{
+    height: 65px;
+    width: 45px;
+    background: #f1f1f1;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ver-field{
+    height: 50px;
+    width: 25px;
+    margin-top: 7px;
+    font-size: 34px;
+    font-weight: 600;
+    background: #f1f1f1;
+    text-align: center;
+    outline: 0;
+    font-family: 'Poppins';
+}
+
+.spacer-field{
+    width: 30px;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 700;
+}
