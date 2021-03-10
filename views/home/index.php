@@ -1,5 +1,7 @@
 <?php 
     session_start();
+    include_once('../../database/list_user_address.php');
+    $adJsonArr = json_decode($address_json, true);
 ?>
 <!DOCTYPE html>
 <html lang="pt_br">
@@ -50,7 +52,7 @@
                 <div>
                     <p class="text-location-ref">Nas proximidades de:</p>
                     <div class="user-location" onclick="open_modal('modal-adress', '1')">
-                        <input placeholder="Rua Arlinda Corrêa de Jesus" disabled="true" id="usr_location">
+                        <input placeholder="<?php echo$adJsonArr['address_user'][0]['adAddress'];?>, <?php echo$adJsonArr['address_user'][0]['adNumber'];?>" disabled="true" id="usr_location">
                         <i data-feather="chevron-down" class="user-location-icon"></i>
                     </div>
                 </div>
@@ -174,7 +176,6 @@
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
         <div class="row">
-
             <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
                 <img class="img-list-service" src="../../assets/images/users/profile_photos/cabeca-de-ideias.png">
                 <div class="info-list">
@@ -375,50 +376,23 @@
         <i class="close-modal" data-feather="x" onclick="modalClose(this, 1)"></i>
         <div class="modal-title">Endereços</div>
         <div class="modal-body">
-            <div class="local-list">
-                <div>
-                    <i data-feather="map-pin" class="pin-list-ad"></i>
+        <?php 
+        foreach($adJsonArr['address_user'] as $arr){
+            //echo$arr['adName'];
+            echo'<div class="local-list">
+                    <div>
+                        <i data-feather="map-pin" class="pin-list-ad"></i>
+                    </div>
+                    <div>
+                        <p class="adress-name">'.$arr["adName"].'</p>
+                        <p class="st-name">'.$arr["adAddress"].', '.$arr["adNumber"].'</p>
+                        <p class="ad-line1">'.$arr["adNbh"].', '.$arr["adCity"].' - '.$arr["adState"].'</p>
+                        <p class="ad-line2">'.$arr["adComp"].'</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="adress-name">Casa</p>
-                    <p class="st-name">Rua Arlinda Correa de Jesus, 90</p>
-                    <p class="ad-line1">Jardim Camburi, Vitória - ES</p>
-                    <p class="ad-line2">Próximo ao carone</p>
-                </div>
-            </div>
-            <div class="local-list">
-                <div>
-                    <i data-feather="map-pin" class="pin-list-ad"></i>
-                </div>
-                <div>
-                    <p class="adress-name">Endereço 2</p>
-                    <p class="st-name">Rua Florêncio Baptista, 332</p>
-                    <p class="ad-line1">Jardim Camburi, Vitória - ES</p>
-                    <p class="ad-line2">Apt 304</p>
-                </div>
-            </div>
-            <div class="local-list">
-                <div>
-                    <i data-feather="map-pin" class="pin-list-ad"></i>
-                </div>
-                <div>
-                    <p class="adress-name">Endereço 2</p>
-                    <p class="st-name">Rua Florêncio Baptista, 332</p>
-                    <p class="ad-line1">Jardim Camburi, Vitória - ES</p>
-                    <p class="ad-line2">Apt 304</p>
-                </div>
-            </div>
-            <div class="local-list">
-                <div>
-                    <i data-feather="map-pin" class="pin-list-ad"></i>
-                </div>
-                <div>
-                    <p class="adress-name">Endereço 2</p>
-                    <p class="st-name">Rua Florêncio Baptista, 332</p>
-                    <p class="ad-line1">Jardim Camburi, Vitória - ES</p>
-                    <p class="ad-line2">Apt 304</p>
-                </div>
-            </div>
+                ';
+        }
+        ?>
         </div>
         <div class="modal-footer">
             <button class="modal-btn">+ Adicionar novo</button>
