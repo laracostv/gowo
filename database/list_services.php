@@ -52,6 +52,9 @@
             }
             //$service['service_nbh'] = 'Jardim Camburi';
             //$service['service_city'] = 'Vitória';
+            $response["success"] = array();
+            array_push($response["success"], '1');
+            
             array_push($response["services_users"], $service);
         }
         }

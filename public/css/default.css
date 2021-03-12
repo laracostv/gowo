@@ -81,10 +81,10 @@ a{
     line-height: 55px;
     font-family: 'Poppins', sans-serif;
     height: 55px;
-    color: var(--text-primary);
+    color: var(--text-dark);
+    background-color: var(--input-color);
     width: 100%;
     outline: 0;
-    background: #E9E9E9;
     border-radius: 8px;
     text-indent: 8px;
     margin-top: 5px;
@@ -95,7 +95,8 @@ a{
     font-size: 18px;
     line-height: 45px;
     font-family: 'Poppins', sans-serif;
-    background: #E9E9E9;
+    color: var(--text-dark);
+    background-color: var(--input-color);
     height: 45px;
     border-radius: 8px;
     text-indent: 8px;

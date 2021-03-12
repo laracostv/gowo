@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+    include_once('../../../database/list_user_address.php');
+    $adJsonArr = json_decode($address_json, true);
+
+    $category = isset($_GET['category']) ? $_GET['category'] : 0;
+    $icon = isset($_GET['icon']) ? $_GET['icon'] : 0;
+?>
 <!DOCTYPE html>
 <html lang="pt_br">
 
@@ -17,6 +25,7 @@
     <link rel="stylesheet" href="../../../public/css/default.css">
     <link rel="stylesheet" href="../../../public/css/views/home.css">
     <!--JS-->
+    <script src="../../../public/js/theme.js"></script>
     <script src="../../../public/js/navigation.js"></script>
     <script src="../../../public/js/interactions.js"></script>
     <!--ICONS-->
@@ -32,6 +41,16 @@
 </head>
 
 <body>
+    <!--THEME COOKIE-->
+    <?php
+        if (isset($_COOKIE["theme"])){
+            $themeCookie = $_COOKIE['theme'];
+            
+            if($themeCookie == 'dark'){
+                echo '<script>darkTheme();</script>';
+            }
+        }
+    ?>
     <!--Page loader-->
     <div class="lds-ellipsis" id="lds-ellipsis">
         <div></div>
@@ -43,8 +62,8 @@
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
             <div class="xs-12 sm-12 md-12 lg-8 xg-8 cat-header">
-                <i class="fas fa-broom"></i>
-                <h2 class="cat-page">Limpeza</h2>
+                <i class="<?php echo$icon;?>"></i>
+                <h2 class="cat-page"><?php echo$category; ?></h2>
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
@@ -55,8 +74,10 @@
             </div>
             <div class="xs-12 sm-12 md-12 lg-6 xg-6">
                 <p class="text-location-ref">Nas proximidades de:</p>
-                <div class="user-location">
-                    <input placeholder="Rua Arlinda Corrêa de Jesus" disabled="true" id="usr_location">
+                <div class="user-location" onclick="open_modal('modal-adress', '0')">
+                    <input
+                        placeholder="<?php echo$adJsonArr['address_user'][0]['adAddress'];?>, <?php echo$adJsonArr['address_user'][0]['adNumber'];?>"
+                        disabled="true" id="usr_location">
                     <i data-feather="chevron-down" class="user-location-icon"></i>
                 </div>
             </div>
@@ -69,9 +90,9 @@
             <div class="xs-12 sm-12 md-12 lg-8 xg-8">
                 <i data-feather="search" class="search-input-icon"></i>
                 <input class="search_input xs-hide sm-hide md-hide lg-show xg-show"
-                    placeholder="Procurar na categoria limpeza...">
+                    placeholder="Procurar na categoria <?php echo$category; ?>...">
                 <input class="search_input xs-show sm-show md-show lg-hide xg-hide"
-                    placeholder="Procurar na categoria limpeza..." onfocus="hideUI()" onblur="showUI()">
+                    placeholder="Procurar na categoria <?php echo$category; ?>..." onfocus="hideUI()" onblur="showUI()">
             </div>
             <div class="xs-hide sm-hide md-2 lg-2 xg-2">
             </div>
@@ -152,8 +173,20 @@
 
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="../../../assets/images/users/profile_photos/user.png"></img>
-        <div class="nav-user">Entrar ou Cadastrar</div>
+        <img class="profile-nav-photo" src="<?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>"></img>
+        <div class="nav-user"><?php
+                    if(isset($_SESSION['name'])){
+                        echo$_SESSION['name'];
+                    }else{
+                        echo"<a href='../../'>Entrar</a> ou <a href='../../views/initial/signup'>Cadastrar</a>";
+                    }
+                ?></div>
         <div class="nav-item-square active-v-nav" onclick="navRedSecond(1)">
             <div>
                 <i data-feather="home" class="v-nav-icon"></i>
@@ -251,84 +284,91 @@
             </div>
         </div>
     </div>
-    <!--MODAL-->
+
+    <!--MODAL Local-->
     <div class="modal-area"
-        onclick="this.style.display='none'; document.getElementById('modal-welcome').style.display='none'"></div>
-    <div class="modal-box" id="modal-welcome">
-        <i class="close-modal" data-feather="x" onclick="modalClose(this)"></i>
-        <div style="max-width: 260px; max-height: 240px" id="welcome-lottie"></div>
-        <div class="modal-title">Olá Usuário!</div>
-        <p class="modal-text">Seja bem-vindo(a) a plataforma que vai revolucionar as interações de trabalho.</p>
+        onclick="document.getElementById('modal-adress').style.display='none'; this.style.display='none';">
+    </div>
+    <div class="modal-box" id="modal-adress">
+        <i class="close-modal" data-feather="x" onclick="modalClose(this, 0)"></i>
+        <div class="modal-title">Endereços</div>
+        <div class="modal-body">
+        <?php 
+        foreach($adJsonArr['address_user'] as $arr){
+            echo'<div class="local-list">
+                    <div>
+                        <i data-feather="map-pin" class="pin-list-ad"></i>
+                    </div>
+                    <div>
+                        <p class="adress-name">'.$arr["adName"].'</p>
+                        <p class="st-name">'.$arr["adAddress"].', '.$arr["adNumber"].'</p>
+                        <p class="ad-line1">'.$arr["adNbh"].', '.$arr["adCity"].' - '.$arr["adState"].'</p>
+                        <p class="ad-line2">'.$arr["adComp"].'</p>
+                    </div>
+                </div>
+                ';
+        }
+        ?>
+        </div>
         <div class="modal-footer">
-            <button class="modal-btn">Vamos lá</button>
-            <div>
-                </img>
-                <!--FIM DO MODAL-->
+            <button class="modal-btn">+ Adicionar novo</button>
+        </div>
+    </div>
+    <!--FIM DO MODAL-->
+    <script>
+        function order_list_display(id) {
+            if (id == 0) {
+                document.getElementById('list-mobile').style.display = "none";
+            }
+            if (id == 1) {
+                document.getElementById('list-mobile').style.display = "fixed";
+            }
+        }
 
-                <script>
-                    function order_list_display(id) {
-                        if (id == 0) {
-                            document.getElementById('list-mobile').style.display = "none";
-                        }
-                        if (id == 1) {
-                            document.getElementById('list-mobile').style.display = "fixed";
-                        }
-                    }
+        const list = {
+            open: false,
+            bottomCartBar: document.getElementsByClassName('bottom-cart-bar')[0],
+            mobileDetails: document.getElementById('mobile-details-list'),
+            mobileDetailsFixed: document.getElementById('mobile-details-fixed'),
+            listMobile: document.getElementById('list-mobile'),
+            headerDetailsListMobile: document.getElementById('header-details-list-mobile')
+        }
 
-                    const list = {
-                        open: false,
-                        bottomCartBar: document.getElementsByClassName('bottom-cart-bar')[0],
-                        mobileDetails: document.getElementById('mobile-details-list'),
-                        mobileDetailsFixed: document.getElementById('mobile-details-fixed'),
-                        listMobile: document.getElementById('list-mobile'),
-                        headerDetailsListMobile: document.getElementById('header-details-list-mobile')
-                    }
+        function open_list() {
+            if (list.open === false) {
+                const height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
+                list.bottomCartBar.style.height = `${height - 55}px`;
+                list.mobileDetails.style.display = 'block';
+                list.mobileDetailsFixed.style.display = 'none';
+                list.listMobile.style.background = 'var(--bg-default)';
+                list.open = true;
 
-                    function open_list() {
-                        if (list.open === false) {
-                            const height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
-                            list.bottomCartBar.style.height = `${height - 55}px`;
-                            list.mobileDetails.style.display = 'block';
-                            list.mobileDetailsFixed.style.display = 'none';
-                            list.listMobile.style.background = 'var(--bg-default)';
-                            list.open = true;
+            } else {
+                list.bottomCartBar.style.height = '40px';
+                list.mobileDetails.style.display = 'none';
+                list.mobileDetailsFixed.style.display = 'flex';
+                list.mobileDetailsFixed.style.justifyContent = 'space-between';
+                list.mobileDetailsFixed.style.backgroundColor = 'var(--bg-color)';
+                list.listMobile.style.background = 'var(--bg-color)';
+                list.open = false;
+            }
+        }
 
-                        } else {
-                            list.bottomCartBar.style.height = '40px';
-                            list.mobileDetails.style.display = 'none';
-                            list.mobileDetailsFixed.style.display = 'flex';
-                            list.mobileDetailsFixed.style.justifyContent = 'space-between';
-                            list.mobileDetailsFixed.style.backgroundColor = 'var(--bg-color)';
-                            list.listMobile.style.background = 'var(--bg-color)';
-                            list.open = false;
-                        }
-                    }
+        feather.replace();
+        order_list_display(0)
+    </script>
+    <script>
+        window.addEventListener("load", function (event) {
+            document.getElementById('lds-ellipsis').style.display = 'none';
+        });
+        function showUI() {
+            document.getElementById('mob-nav').style.display = 'block';
+        }
+        function hideUI() {
+            document.getElementById('mob-nav').style.display = 'none';
+        }
+    </script>
 
-                    feather.replace();
-                    order_list_display(0)
-            //open_modal('modal-welcome')
-                </script>
-                <script>
-                    var animation = bodymovin.loadAnimation({
-                        // animationData: { /* ... */ },
-                        container: document.getElementById('welcome-lottie'), // required
-                        path: '../../../assets/images/ui/lottie/welcome-gears-jobs.json', // required
-                        renderer: 'svg', // required
-                        loop: true, // optional
-                        autoplay: true, // optional
-                        name: "Welcome", // optional
-                    });
-                    window.addEventListener("load", function (event) {
-                        document.getElementById('lds-ellipsis').style.display = 'none';
-                    });
-                    function showUI() {
-                        document.getElementById('mob-nav').style.display = 'block';
-                    }
-                    function hideUI() {
-                        document.getElementById('mob-nav').style.display = 'none';
-                    }
-                </script>
-                <script src="../../../public/js/theme.js"></script>
 </body>
 
 </html>

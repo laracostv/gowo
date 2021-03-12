@@ -184,13 +184,30 @@
 .disbaled-list-tag{
     position: absolute;
     right: 0px;
-    top: 0px;
     background-color: var(--gray-dark);
     padding-left: 3px;
     padding-right: 3px;
     font-size: 14px;
+    margin-top: -15px;
     font-weight: 600;
 }
+
+/** SAFARI ONLY */
+@media not all and (min-resolution: .001dpcm) {
+    @supports(-webkit-appearance:none) and (stroke-color:transparent) { 
+        .disbaled-list-tag{
+            position: absolute;
+            right: 10px;
+            background-color: var(--gray-dark);
+            padding-left: 3px;
+            padding-right: 3px;
+            font-size: 14px;
+            margin-top: -15px;
+            font-weight: 600;
+        }
+    }
+  }
+/** SAFARI ONLY */
 
 .img-list-service{
     height: 75px;
@@ -270,6 +287,7 @@
 .cat-page{
     color: var(--icon-white-color);
     font-weight: 800;
+    text-transform: capitalize;
 }
 
 .cat-header i{
@@ -292,7 +310,8 @@
 
 #partner_form select{
     background: url(../../../assets/images/ui/chevron-down.svg);
-    background-color: #efefef;
+    color: var(--text-dark);
+    background-color: var(--input-color);
     background-repeat: no-repeat;
     background-position: 97%;
     width: 100%;

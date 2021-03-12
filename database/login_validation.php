@@ -21,7 +21,7 @@
             $_SESSION['email'] = $user_data['usrEmail'];
             $_SESSION['cell'] = $user_data['usrCellPhone'];
             $_SESSION['dateN'] = $user_data['usrDateN'];
-            //$_SESSION['profile_photo'] = $user_data['profile_photo'];
+            $_SESSION['profile_photo'] = $user_data['usrProfilePhoto'];
             $_SESSION['id_usr'] = $user_data['idUser'];
             $_SESSION['active_adress'] = $user_data['usrActiveAdress'];           
 

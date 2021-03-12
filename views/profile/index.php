@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../../public/css/default.css">
     <link rel="stylesheet" href="../../public/css/views/profile.css">
     <!--JS-->
+    <script src="../../public/js/theme.js"></script>
     <script src="../../public/js/navigation.js"></script>
     <script src="../../public/js/interactions.js"></script>
     <!--ICONS-->
@@ -36,27 +37,85 @@
 </head>
 
 <body>
+    <?php
+        if (isset($_COOKIE["theme"])){
+            $themeCookie = $_COOKIE['theme'];
+            
+            if($themeCookie == 'dark'){
+                echo '<script>darkTheme();</script>';
+            }
+        }
+    ?>
 
 
-    <div class="container">
+    <div class="container" style="padding: 0px">
         <div class="row">
         <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         <div class="xs-12 sm-12 md-12 lg-8 xg-8">
             <div class="header-profile">
+            <img class="header-img-profile" src="../../assets/brand/logo-gowo-white-h120.png">
 
             </div>
             <center>
-                <img src="../../assets/images/users/profile_photos/image.jpg" class="profile_photo"></img>
+                <img src="<?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>" class="profile_photo"></img>
+                <p class="usr_profile_name"><?php echo$_SESSION['name']; ?></p>
             </center>
-            <a href="../../database/exit_session.php"><div class="exit-text">Sair</div></a>
         </div>
         <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
     </div>
+    <div style="height:40px"></div>
+    <div class="container">
+        <div class="row">
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+            <div class="xs-12 sm-12 md-4 lg-2 xg-2">
+                    <div class="box-option-profile">
+                        <i class="box-option-profile-icon" data-feather="help-circle"></i>
+                        <p>Ajuda</p>
+                    </div>
+            </div>
+
+            <div class="xs-12 sm-12 md-4 lg-2 xg-2" onclick="window.location.href = 'settings'">
+                    <div class="box-option-profile">
+                        <i class="box-option-profile-icon" data-feather="settings"></i>
+                        <p>Configurações</p>
+                    </div>
+            </div>
+
+            <div class="xs-12 sm-12 md-4 lg-2 xg-2">
+                    <div class="box-option-profile">
+                        <i class="box-option-profile-icon" data-feather="book"></i>
+                        <p>Histórico de serviços</p>
+                    </div>
+            </div>
+            <div class="xs-12 sm-12 md-4 lg-2 xg-2">
+                    <div class="box-option-profile">
+                        <i class="box-option-profile-icon" data-feather="user-check"></i>
+                        <p>Meus serviços</p>
+                    </div>
+            </div>
+            <div class="xs-hide sm-hide md-hide lg-1 xg-1"></div>
+        </div>
+        <div style="height: 40px"></div>
+        <center>Gowo &middot v0.3</center>
+        <div style="height: 80px"></div>
+    </div>
 
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="../../assets/images/users/profile_photos/user.png"></img>
+        <img class="profile-nav-photo" src="<?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>"></img>
         <div class="nav-user"><?php
                     if(isset($_SESSION['name'])){
                         echo$_SESSION['name'];
@@ -139,10 +198,7 @@
 
     <script>
         feather.replace();
-        //order_list_display(0)
-        //open_modal('modal-welcome')
     </script>
-    <script src="../../public/js/theme.js"></script>
 </body>
 
 </html>

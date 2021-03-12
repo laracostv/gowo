@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../../../public/css/default.css">
     <link rel="stylesheet" href="../../../public/css/views/home.css">
     <!--JS-->
+    <script src="../../../public/js/theme.js"></script>
     <script src="../../../public/js/navigation.js"></script>
     <script src="../../../public/js/interactions.js"></script>
     <script src="../../../public/js/vanilla-masker.js"></script>
@@ -39,6 +40,16 @@
 </head>
 
 <body>
+    <!--THEME COOKIE-->
+    <?php
+        if (isset($_COOKIE["theme"])){
+            $themeCookie = $_COOKIE['theme'];
+            
+            if($themeCookie == 'dark'){
+                echo '<script>darkTheme();</script>';
+            }
+        }
+    ?>
     <!--Page loader-->
     <div class="lds-ellipsis" id="lds-ellipsis">
         <div></div>
@@ -50,7 +61,7 @@
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
             <div class="xs-12 sm-12 md-12 lg-8 xg-8 cat-header">
-                <i class="fas fa-broom"></i>
+                <i class="fas fa-user-check"></i>
                 <h2 class="cat-page">Novo serviço</h2>
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
@@ -137,39 +148,6 @@
         <img class="v-nav-brand" src="../../../assets/brand/logo-gowo-white-h120.png">
     </div>
 
-    <!--MOBILE BAR NAVIGATION-->
-
-    <div class="container-fluid bottom-nav-bar xg-hide lg-hide md-show" id="mob-nav">
-        <div class="row">
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(1)">
-                <div>
-                    <center><i data-feather="home" class="nav-icon active-mob"></i></center>
-                    <div class="text-nav active-mob">Início</div>
-                </div>
-            </div>
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(20)">
-                <div>
-                    <center><i data-feather="message-square" class="nav-icon"></i></center>
-                    <div class="text-nav">Chat</div>
-                    <!--<div class="chat-notification">10</div>-->
-                </div>
-            </div>
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(3)">
-                <div>
-                    <center><i data-feather="bell" class="nav-icon"></i></center>
-                    <div class="text-nav">Recentes</div>
-                </div>
-            </div>
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(4)">
-                <div>
-                    <center><i data-feather="user" class="nav-icon"></i></center>
-                    <div class="text-nav">Perfil</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--MODAL-->
-
     <script>
         feather.replace();
                 //open_modal('modal-welcome')
@@ -195,7 +173,6 @@
             zeroCents: false
         });
     </script>
-    <script src="../../../public/js/theme.js"></script>
 </body>
 
 </html>

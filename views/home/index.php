@@ -1,7 +1,9 @@
 <?php 
     session_start();
     include_once('../../database/list_user_address.php');
+    
     $adJsonArr = json_decode($address_json, true);
+    $adrState = $adJsonArr['success'][0];
 ?>
 <!DOCTYPE html>
 <html lang="pt_br">
@@ -22,6 +24,7 @@
     <link rel="stylesheet" href="../../public/css/default.css">
     <link rel="stylesheet" href="../../public/css/views/home.css">
     <!--JS-->
+    <script src="../../public/js/theme.js"></script>
     <script src="../../public/js/navigation.js"></script>
     <script src="../../public/js/interactions.js"></script>
     <!--ICONS-->
@@ -37,6 +40,15 @@
 </head>
 
 <body>
+    <?php
+        if (isset($_COOKIE["theme"])){
+            $themeCookie = $_COOKIE['theme'];
+            
+            if($themeCookie == 'dark'){
+                echo '<script>darkTheme();</script>';
+            }
+        }
+    ?>
     <!--Page loader-->
     <div class="lds-ellipsis" id="lds-ellipsis">
         <div></div>
@@ -52,7 +64,13 @@
                 <div>
                     <p class="text-location-ref">Nas proximidades de:</p>
                     <div class="user-location" onclick="open_modal('modal-adress', '1')">
-                        <input placeholder="<?php echo$adJsonArr['address_user'][0]['adAddress'];?>, <?php echo$adJsonArr['address_user'][0]['adNumber'];?>" disabled="true" id="usr_location">
+                        <input placeholder="<?php
+                            if($adrState > 0){
+                                echo$adJsonArr['address_user'][0]['adAddress'].', '.$adJsonArr['address_user'][0]['adNumber'];;
+                            }else{
+                                echo'Clique para adicionar local';
+                            }
+                        ?>" disabled="true" id="usr_location">
                         <i data-feather="chevron-down" class="user-location-icon"></i>
                     </div>
                 </div>
@@ -79,7 +97,7 @@
         <div class="row slide-category">
             <div class="xs-hide sm-hide md-2 lg-2 xg-2"></div>
             <div class="xs-12 sm-12 md-12 lg-8 xg-8 distribute-category">
-                <a href="category/?limpeza">
+                <a href="category/?category=limpeza&icon=fas%20fa-broom">
                     <div class='middle-col-alig'>
                         <div class="category-square">
                             <center>
@@ -92,86 +110,104 @@
                     </div>
                 </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-tshirt"></i>
+                <a href="category/?category=corte%20e%20costura&icon=fas%20fa-tshirt">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <div class="category-title">Corte e Costura</div>
                         </div>
-                        <div class="category-title">Corte e Costura</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-car"></i>
+                <a href="category/?category=automotivo&icon=fas%20fa-car">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <div class="category-title">Automotivo</div>
                         </div>
-                        <div class="category-title">Automotivo</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-heart"></i>
+                <a href="category/?category=beleza&icon=fas%20fa-heart">    
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="category-title">Beleza</div>
                         </div>
-                        <div class="category-title">Beleza</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-paw"></i>
+                <a href="category/?category=cuidados%20pet&icon=fas%20fa-paw"> 
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-paw"></i>
+                            </div>
+                            <div class="category-title">Cuidados Pet</div>
                         </div>
-                        <div class="category-title">Cuidados Pet</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-camera"></i>
+                <a href="category/?category=fotografia&icon=fas%20fa-camera">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="category-title">Fotografia</div>
                         </div>
-                        <div class="category-title">Fotografia</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-utensils"></i>
+                <a href="category/?category=comida&icon=fas%20fa-utensils">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <div class="category-title">Comida</div>
                         </div>
-                        <div class="category-title">Comida</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-laptop"></i>
+                <a href="category/?category=informática&icon=fas%20fa-laptop">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="category-title">Informática</div>
                         </div>
-                        <div class="category-title">Informática</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-seedling"></i>
+                <a href="category/?category=jardinagem&icon=fas%20fa-seedling">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <div class="category-title">Jardinagem</div>
                         </div>
-                        <div class="category-title">Jardinagem</div>
                     </div>
-                </div>
+                </a>
 
-                <div class='middle-col-alig'>
-                    <div class="category-square">
-                        <div class="category-circle">
-                            <i class="fas fa-paint-roller"></i>
+                <a href="category/?category=reformas%20e%20consertos&icon=fas%20fa-paint-roller">
+                    <div class='middle-col-alig'>
+                        <div class="category-square">
+                            <div class="category-circle">
+                                <i class="fas fa-paint-roller"></i>
+                            </div>
+                            <div class="category-title">Reformas e Consertos</div>
                         </div>
-                        <div class="category-title">Reformas e Consertos</div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
@@ -249,7 +285,13 @@
 
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="../../assets/images/users/profile_photos/user.png"></img>
+        <img class="profile-nav-photo" src="<?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>"></img>
         <div class="nav-user"><?php
                     if(isset($_SESSION['name'])){
                         echo$_SESSION['name'];
@@ -481,7 +523,6 @@
         }
 
     </script>
-    <script src="../../public/js/theme.js"></script>
 </body>
 
 </html>

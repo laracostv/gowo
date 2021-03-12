@@ -18,7 +18,7 @@
     if($id_result = mysqli_query($link, $sql)){
         $data_ver_usr = mysqli_fetch_array($id_result);
 
-        if(isset($data_ver_usr['email'])){
+        if(isset($data_ver_usr['usrEmail'])){
             $existent_email = true;
         }
     }else{
@@ -26,8 +26,8 @@
     };
 
     if($existent_email){
-        $get_return = '?email_exist=1&';
-        header('Location: ../views/inicial/cadastro.php'.$get_return);
+        $get_return = '?email_exist=1';
+        header('Location: ../views/initial/signup/'.$get_return);
         die();
     }
 
@@ -36,7 +36,7 @@
 
     if(mysqli_query($link,  $sql)){
         session_start();
-        $sql = "SELECT * FROM users WHERE email = '$email' AND pwd = '$senha'";
+        $sql = "SELECT * FROM users WHERE usrEmail = '$email' AND usrPwd = '$senha'";
 
         $objDb = new db();
         $link = $objDb->mysql_connect();
@@ -45,18 +45,18 @@
 
         if($result_id){
             $user_data = mysqli_fetch_array($result_id);
-            if(isset($user_data['email'])){
+            if(isset($user_data['usrEmail'])){
 
                 $_SESSION['name'] = $user_data['usrName'];
                 $_SESSION['last_name'] = $user_data['usrLastName'];
                 $_SESSION['email'] = $user_data['usrEmail'];
                 $_SESSION['cell'] = $user_data['usrCellPhone'];
                 $_SESSION['dateN'] = $user_data['usrDateN'];
-                //$_SESSION['profile_photo'] = $user_data['profile_photo'];
+                $_SESSION['profile_photo'] = $user_data['usrProfilePhoto'];
                 $_SESSION['id_usr'] = $user_data['idUser'];
-                $_SESSION['active_adress'] = $user_data['usrActiveAdress']; 
+                $_SESSION['active_adress'] = $user_data['usrActiveAdress'];
                 
-                header('Location: ../../../views/home');
+                header('Location: ../views/home');
             }else{
                 header('Location: ../index.php?erro=1');
             }
