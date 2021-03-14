@@ -1,8 +1,9 @@
 <?php
-
+$link = '';
 // connecting to db
 require_once('../db.class.php');
-
+$objDb = new db();
+$link = $objDb->mysql_connect();
 // array for JSON response
 $response = array();
 
@@ -14,12 +15,9 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 
 	$sql = "SELECT * FROM users WHERE usrEmail = '$login' AND usrPwd = '$password'";
 
-	$objDb = new db();
-	$link = $objDb->mysql_connect();
-
 	$query = mysqli_query($link, $sql);
 
-	if(mysql_num_rows($query) > 0){
+	if(mysqli_num_rows($query) > 0){
 		$row = mysql_fetch_array($query);
 		if($password == $row['password']){
 			$response["success"] = 1;
@@ -40,6 +38,9 @@ else {
 	$response["success"] = 0;
 	$response["error"] = "faltam parametros";
 }
-mysql_close($link);
+
+//$query->close();
+mysqli_close($link);
+
 echo json_encode($response);
 ?>
