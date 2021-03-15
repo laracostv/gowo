@@ -14,7 +14,7 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 	$login = trim($_POST['login']);
 	$password = trim(md5($_POST['password']));
 	
-	$sql = "SELECT usrPwd FROM usuários WHERE usrEmail = '$ login'";
+	$sql = "SELECT usrPwd FROM users WHERE usrEmail = '$ login'";
 
 	$query = mysqli_query($link, $sql);
 
