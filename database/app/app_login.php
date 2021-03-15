@@ -9,17 +9,18 @@ $response = array();
 
 // check for required fields
 if (isset($_POST['login']) && isset($_POST['password'])) {
-	
-    $login = trim($_POST['login']);
-	$password = trim(md5($_POST['password']));
 
+    
+	$login = trim($_POST['login']);
+	$password = trim(md5($_POST['password']));
+	
 	$sql = "SELECT * FROM users WHERE usrEmail = '$login' AND usrPwd = '$password'";
 
 	$query = mysqli_query($link, $sql);
 
 	if(mysqli_num_rows($query) > 0){
-		$row = mysql_fetch_array($query);
-		if($password == $row['password']){
+		$row = mysqli_fetch_array($query);
+		if($password == $row['usrPwd']){
 			$response["success"] = 1;
 		}
 		else {
