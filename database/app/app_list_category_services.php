@@ -46,6 +46,7 @@ if (mysqli_num_rows($result) > 0) {
             $userDoArray = mysqli_fetch_array($result_user);
             $services["userDoName"] = $userDoArray['usrName'];
             $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhoto'];
+            
             //echo$services["userDoName"];
             //echo json_encode(mysqli_fetch_array($result_user));
 
@@ -58,7 +59,7 @@ if (mysqli_num_rows($result) > 0) {
 
             //$services["sName"] = $row["sName"];
     
-            // Adiciona o produto no array de produtos.
+            // Adiciona o servico no array de produtos.
             array_push($response["services"], $services);
         }
     }
