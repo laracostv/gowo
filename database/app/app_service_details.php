@@ -2,20 +2,20 @@
  
 /*
  * O codigo seguinte retorna os dados detalhados de um servico.
- * Essa e uma requisicao do tipo GET. Um produto e identificado 
- * pelo campo pid.
+ * Essa e uma requisicao do tipo GET. Um servico e identificado 
+ * pelo campo idService.
  */
 $link = '';
 // array que guarda a resposta da requisicao
 $response = array();
 
-//$teste_category = 'Automotivo';
+//$teste_category = 1;
 
 // Verifica se o parametro pid foi enviado na requisicao
-if (isset($_GET["category"])) {
+if (isset($_GET["idService"])) {
     //if (isset($teste_category)) {	
 	// Aqui sao obtidos os parametros
-    $category = $_GET['category'];
+    $idService = $_GET['idService'];
 	//$category = $teste_category;
 	// Abre uma conexao com o BD.
     require_once('../db.class.php');
@@ -23,7 +23,7 @@ if (isset($_GET["category"])) {
     $link = $objDb->mysql_connect();
  
     // Obtem do BD os detalhes do produto com pid especificado na requisicao GET
-    $sql = "SELECT * FROM services WHERE sClass = '$category'";
+    $sql = "SELECT * FROM services WHERE idService = '$idService'";
 
 	$query = mysqli_query($link, $sql);
 
