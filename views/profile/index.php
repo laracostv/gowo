@@ -70,37 +70,51 @@
         <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
     </div>
-    <div style="height:40px"></div>
+    <div style="height:60px"></div>
     <div class="container">
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-            <div class="xs-12 sm-12 md-4 lg-2 xg-2">
+
+            <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'favorites'">
                     <div class="box-option-profile">
-                        <i class="box-option-profile-icon" data-feather="help-circle"></i>
-                        <p>Ajuda</p>
+                        <i class="box-option-profile-icon" data-feather="heart"></i>
+                        <p>Favoritos</p>
                     </div>
             </div>
 
-            <div class="xs-12 sm-12 md-4 lg-2 xg-2" onclick="window.location.href = 'settings'">
-                    <div class="box-option-profile">
-                        <i class="box-option-profile-icon" data-feather="settings"></i>
-                        <p>Configurações</p>
-                    </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-4 lg-2 xg-2">
+            <div class="xs-12 sm-12 md-6 lg-2 xg-2">
                     <div class="box-option-profile">
                         <i class="box-option-profile-icon" data-feather="book"></i>
                         <p>Histórico de serviços</p>
                     </div>
             </div>
-            <div class="xs-12 sm-12 md-4 lg-2 xg-2">
+
+            <div class="xs-12 sm-12 md-6 lg-2 xg-2">
                     <div class="box-option-profile">
                         <i class="box-option-profile-icon" data-feather="user-check"></i>
                         <p>Meus serviços</p>
                     </div>
             </div>
-            <div class="xs-hide sm-hide md-hide lg-1 xg-1"></div>
+
+            <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'settings'">
+                    <div class="box-option-profile">
+                        <i class="box-option-profile-icon" data-feather="settings"></i>
+                        <p>Configurações</p>
+                    </div>
+            </div>
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+        </div>
+        <div class="row">
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+
+            <div class="xs-12 sm-12 md-6 lg-2 xg-2">
+            <div class="box-option-profile">
+                <i class="box-option-profile-icon" data-feather="help-circle"></i>
+                <p>Ajuda</p>
+            </div>
+
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+        </div>
         </div>
         <div style="height: 40px"></div>
         <center>Gowo &middot v0.3</center>
@@ -131,8 +145,8 @@
         </div>
         <div class="nav-item-square" onclick="navRed(2)">
             <div>
-                <i data-feather="message-square" class="v-nav-icon"></i>
-                <div class="v-nav-item-name">Chat</div>
+                <i data-feather="search" class="v-nav-icon"></i>
+                <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
         <div class="nav-item-square" onclick="navRed(3)">
@@ -163,8 +177,8 @@
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(20)">
                 <div>
-                    <center><i data-feather="message-square" class="nav-icon"></i></center>
-                    <div class="text-nav">Chat</div>
+                    <center><i data-feather="search" class="nav-icon"></i></center>
+                    <div class="text-nav">Buscar</div>
                     <!--<div class="chat-notification">10</div>-->
                 </div>
             </div>

@@ -265,8 +265,9 @@
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRedSecond(20)">
                 <div>
-                    <center><i data-feather="message-square" class="nav-icon"></i></center>
-                    <div class="text-nav">Chat</div>
+                    <center><i data-feather="search" class="nav-icon"></i></center>
+                    <div class="text-nav">Buscar</div>
+                   
                     <!--<div class="chat-notification">10</div>-->
                 </div>
             </div>
