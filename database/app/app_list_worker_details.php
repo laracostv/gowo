@@ -18,6 +18,7 @@ while ($row = mysqli_fetch_array($result)) {
 
     $servicesDetails["serviceId"] = $row["idService"];
     $servicesDetails["serviceName"] = $row["sName"];
+    $servicesDetails["servicePhoto"] = $row["sPhoto"];
     //$serviceDesc = $row["sDesc"];
     $servicesDetails["serviceVal"] = $row["sVal"];
     array_push($servicesList["servicesWorker"], $servicesDetails);

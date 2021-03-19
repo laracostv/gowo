@@ -66,7 +66,13 @@
                     <div class="user-location" onclick="open_modal('modal-adress', '1')">
                         <input placeholder="<?php
                             if($adrState > 0){
-                                echo$adJsonArr['address_user'][0]['adAddress'].', '.$adJsonArr['address_user'][0]['adNumber'];;
+                                foreach($adJsonArr['address_user'] as $arr){
+                                    if($arr["idAdress"] == $_SESSION['active_adress']){
+                                        echo $arr["adAddress"];
+                                        echo ', ';
+                                        echo $arr["adNumber"];
+                                    }
+                                }
                             }else{
                                 echo'Clique para adicionar local';
                             }
@@ -417,21 +423,23 @@
     <div class="modal-box" id="modal-adress">
         <i class="close-modal" data-feather="x" onclick="modalClose(this, 1)"></i>
         <div class="modal-title">Endereços</div>
-        <div class="modal-body">
+        <div class="modal-body a-no-decoration">
         <?php 
         foreach($adJsonArr['address_user'] as $arr){
             //echo$arr['adName'];
-            echo'<div class="local-list">
-                    <div>
-                        <i data-feather="map-pin" class="pin-list-ad"></i>
+            echo'<a href="../../database/choose_active_address.php?address='.$arr["idAdress"].'">
+                    <div class="local-list">
+                        <div>
+                            <i data-feather="map-pin" class="pin-list-ad"></i>
+                        </div>
+                        <div>
+                            <p class="adress-name">'.$arr["adName"].'</p>
+                            <p class="st-name">'.$arr["adAddress"].', '.$arr["adNumber"].'</p>
+                            <p class="ad-line1">'.$arr["adNbh"].', '.$arr["adCity"].' - '.$arr["adState"].'</p>
+                            <p class="ad-line2">'.$arr["adComp"].'</p>
+                        </div>
                     </div>
-                    <div>
-                        <p class="adress-name">'.$arr["adName"].'</p>
-                        <p class="st-name">'.$arr["adAddress"].', '.$arr["adNumber"].'</p>
-                        <p class="ad-line1">'.$arr["adNbh"].', '.$arr["adCity"].' - '.$arr["adState"].'</p>
-                        <p class="ad-line2">'.$arr["adComp"].'</p>
-                    </div>
-                </div>
+                </a>
                 ';
         }
         ?>

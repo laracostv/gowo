@@ -76,6 +76,9 @@ a{
 }
 /*INPUTS*/
 
+.a-no-decoration a{
+    text-decoration: none;
+}
 .normal-input{
     font-size: 18px;
     line-height: 55px;
