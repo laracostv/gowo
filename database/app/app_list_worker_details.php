@@ -15,7 +15,7 @@ $servicesList["servicesWorker"] = array();
 
 while ($row = mysqli_fetch_array($result)) {
     $servicesDetails = array();
-
+    $servicesDetails["idUserDo"] = $workerSet;
     $servicesDetails["serviceId"] = $row["idService"];
     $servicesDetails["serviceName"] = $row["sName"];
     $servicesDetails["servicePhoto"] = $row["sPhoto"];
