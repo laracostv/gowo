@@ -229,7 +229,7 @@
                 echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
                             <a href="user/'.$arr['idUsr'].'">
                                 <div class="box-list">
-                                    <img class="img-list-service" src="'.$arr['userDoProfilePhoto'].'">
+                                    <img class="img-list-service" src="../../assets/images/users/profile_photos/'.$arr['userDoProfilePhoto'].'">
                                         <div class="info-list">
                                             <p class="title-list">'.$arr['userDoName'].'</p>
                                             <div class="list-cat-star">

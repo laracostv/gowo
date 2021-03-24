@@ -33,10 +33,10 @@
                 $services["sState"] = $addressArray['adState'];
                 
                 if($services["sNbh"] == $nbhActive && $services["sCity"] == $cityActive){
-                    $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhoto FROM users WHERE idUser = $servicesIdUserDo");
+                    $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhotoSrc FROM users WHERE idUser = $servicesIdUserDo");
                     $userDoArray = mysqli_fetch_array($result_user);
                     $services["userDoName"] = $userDoArray['usrName'];
-                    $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhoto'];
+                    $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhotoSrc'];
                     $services['sClass'] = $row["sClass"];
 
 
@@ -64,10 +64,10 @@
                 $services["sState"] = $addressArray['adState'];
 
                 if($services["sCity"] == $cityActive){
-                    $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhoto FROM users WHERE idUser = $servicesIdUserDo");
+                    $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhotoSrc FROM users WHERE idUser = $servicesIdUserDo");
                     $userDoArray = mysqli_fetch_array($result_user);
                     $services["userDoName"] = $userDoArray['usrName'];
-                    $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhoto'];
+                    $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhotoSrc'];
                     $services['sClass'] = $row["sClass"];
 
 
@@ -96,10 +96,10 @@
 
                 if($services["sState"] == $stateActive){
                     echo'<script>console.log("state 3")</script>';
-                    $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhoto FROM users WHERE idUser = $servicesIdUserDo");
+                    $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhotoSrc FROM users WHERE idUser = $servicesIdUserDo");
                     $userDoArray = mysqli_fetch_array($result_user);
                     $services["userDoName"] = $userDoArray['usrName'];
-                    $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhoto'];
+                    $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhotoSrc'];
                     $services['sClass'] = $row["sClass"];
 
 

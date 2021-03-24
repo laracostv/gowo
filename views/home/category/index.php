@@ -1,9 +1,13 @@
 <?php 
     session_start();
     include_once('../../../database/list_user_address.php');
-    $adJsonArr = json_decode($address_json, true);
 
+    $adJsonArr = json_decode($address_json, true);
     $category = isset($_GET['category']) ? $_GET['category'] : 0;
+
+    include_once('../../../database/list_services_by_category.php');
+    $CategoryServicesJsonArr = json_decode($services_json, true);
+
     $icon = isset($_GET['icon']) ? $_GET['icon'] : 0;
 ?>
 <!DOCTYPE html>
@@ -92,81 +96,40 @@
                 <input class="search_input xs-hide sm-hide md-hide lg-show xg-show"
                     placeholder="Procurar na categoria <?php echo$category; ?>...">
                 <input class="search_input xs-show sm-show md-show lg-hide xg-hide"
-                    placeholder="Procurar na categoria <?php echo$category; ?>..." onfocus="hideUI()" onblur="showUI()">
+                    placeholder="Procurar na categoria <?php echo$category; ?>...">
             </div>
             <div class="xs-hide sm-hide md-2 lg-2 xg-2">
             </div>
         </div>
 
         <div class="row">
+        <?php 
+        
+            foreach($CategoryServicesJsonArr['services'] as $arr){
+                //echo$arr['adName'];
 
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../../assets/images/users/profile_photos/cabeca-de-ideias.png">
-                <div class="info-list">
-                    <p class="title-list">Cabeça de Ideias</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>5.0 &middot; Design</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../../assets/images/partners_brand/1.jpg">
-                <div class="info-list">
-                    <p class="title-list">Confiance</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.9 &middot; Automotivo</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../../assets/images/partners_brand/2.jpg">
-                <div class="info-list">
-                    <p class="title-list">CLIMEV</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.9 &middot; Cuidados Pet</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../../assets/images/partners_brand/3.jpg">
-                <div class="info-list">
-                    <p class="title-list">Casa do Mecânico</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.7 &middot; Automotivo</p>
-                    </div>
-                    <p class="loc-list">Laranjeiras - Serra</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list box-list-disabled">
-                <img class="img-list-service" src="../../../assets/images/partners_brand/5.jpg">
-                <div class="info-list">
-                    <div class="disbaled-list-tag">Indisponível</div>
-                    <p class="title-list">Vertical Jardinagem</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.5 &middot; Design</p>
-                    </div>
-                    <p class="loc-list">Bento Ferreira - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list box-list-disabled">
-                <img class="img-list-service" src="../../../assets/images/partners_brand/6.jpg">
-                <div class="info-list">
-                    <div class="disbaled-list-tag">Indisponível</div>
-                    <p class="title-list">Lorenna Monteil</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.9 &middot; Beleza</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
+                echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
+                            <a href="user/'.$arr['idUsr'].'">
+                                <div class="box-list">
+                                    <img class="img-list-service" src="../../../assets/images/users/profile_photos/'.$arr['sProfilePhoto'].'">
+                                        <div class="info-list">
+                                            <p class="title-list">'.$arr['userDoName'].'</p>
+                                            <div class="list-cat-star">
+                                                <p class="cat-list"><i data-feather="star" class="star-list"></i>5.0 &middot; '.$arr['sClass'].'</p>
+                                            </div>
+                                            <p class="loc-list">'.$arr['sNbh'].' - '.$arr['sCity'].'</p>
+                                        </div>
+                                </div>
+                            </a>
+                        </div>
+                    ';
+            }
+            if(isset($CategoryServicesJsonArr['message'])){
+                echo'<div class="xs-12 sm-12 md-12 lg-12 xg-12 warning-message-service">
+                        <center><h2>'.$CategoryServicesJsonArr['message'].'</h2></center>
+                    </div>';
+            }
+            ?>            
         </div>
     </div>
 
@@ -215,75 +178,6 @@
     </div>
     <div class="nav-cart-circle">
         <i data-feather="briefcase" class="nav-cart-circle-icon"></i>
-    </div>
-
-    <!--ORDER LIST MOBILE-->
-    <div class="bottom-spacer"></div>
-    <div id="list-mobile" class="container-fluid bottom-cart-bar xg-hide lg-hide md-show">
-        <div class="row" id="mobile-details-fixed" onclick="open_list(1)">
-            <div class="md-3">
-                <i data-feather="briefcase" class='m-icon-cart'></i>
-                <div class="m-counter-cart">3</div>
-            </div>
-            <div class="md-6">
-                <div class="text-cart-bottom">Ver lista</div>
-            </div>
-            <div class="md-3">
-                <div class="m-price">R$ 19,99</div>
-            </div>
-        </div>
-        <div id="mobile-details-list" class="mobile-details-list">
-            <div id="header-details-list-mobile" class="header-details-list-mobile">
-                <i class="close-mobile-details-list" data-feather="x" onclick="open_list(5)"></i>
-                <i data-feather="briefcase" class='mobile-details-icon'></i>
-                <div class="mobile-details-title">Sua lista</div>
-            </div>
-            <div class="mobile-all-orders">
-                <div class="order-mobile" id="order1">
-                    <div class="title-order">
-                        <img class="order-place-img"
-                            src="../../../assets/images/users/profile_photos/cabeca-de-ideias.png">
-                        <div class="order-place-name">Cabeça de Ideias</div>
-                    </div>
-                    <div class="desc-order">
-                        <div class="mobile-order-item">Identidade Visual - Básico</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--MOBILE BAR NAVIGATION-->
-
-    <div class="container-fluid bottom-nav-bar xg-hide lg-hide md-show" id="mob-nav">
-        <div class="row">
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(1)">
-                <div>
-                    <center><i data-feather="home" class="nav-icon active-mob"></i></center>
-                    <div class="text-nav active-mob">Início</div>
-                </div>
-            </div>
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(20)">
-                <div>
-                    <center><i data-feather="search" class="nav-icon"></i></center>
-                    <div class="text-nav">Buscar</div>
-                   
-                    <!--<div class="chat-notification">10</div>-->
-                </div>
-            </div>
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(3)">
-                <div>
-                    <center><i data-feather="bell" class="nav-icon"></i></center>
-                    <div class="text-nav">Recentes</div>
-                </div>
-            </div>
-            <div class="md-3 center-x-y height-60" onclick="navRedSecond(4)">
-                <div>
-                    <center><i data-feather="user" class="nav-icon"></i></center>
-                    <div class="text-nav">Perfil</div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!--MODAL Local-->
@@ -362,12 +256,13 @@
         window.addEventListener("load", function (event) {
             document.getElementById('lds-ellipsis').style.display = 'none';
         });
+        /*
         function showUI() {
             document.getElementById('mob-nav').style.display = 'block';
         }
         function hideUI() {
             document.getElementById('mob-nav').style.display = 'none';
-        }
+        }*/
     </script>
 
 </body>

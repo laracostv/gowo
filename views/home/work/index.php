@@ -8,7 +8,7 @@
 <html lang="pt_br">
 
 <head>
-    <title>GoWo</title>
+    <title>Novo Serviço</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/brand/icons/apple-touch-icon.png">
@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="../../../public/css/grid.css">
     <link rel="stylesheet" href="../../../public/css/default.css">
     <link rel="stylesheet" href="../../../public/css/views/home.css">
+    <link rel="stylesheet" href="../../../public/css/views/work.css">
     <!--JS-->
     <script src="../../../public/js/theme.js"></script>
     <script src="../../../public/js/navigation.js"></script>
@@ -73,6 +74,9 @@
             <div class="xs-12 sm-12 md-12 lg-6 xg-6">
                 <br>
                 <form id="partner_form" method="post">
+                    <div class="fileUpload">
+                        <input type="file" name="arquivo" id="up_image" class="upload" onchange="previewFile(this);" required/>
+                    </div>
                     <input class="normal-input" id="name" type="text"
                         placeholder="Título do serviço ex.: Faxina, Brigadeiros, Conserto de celular... " name="name"
                         required>
@@ -108,12 +112,19 @@
             </div>
             <div class="xs-hide sm-hide md-hide lg-3 xg-3"></div>
         </div>
+        <div class="height-60"></div>
     </div>
 
 
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="../../../assets/images/users/profile_photos/user.png"></img>
+        <img class="profile-nav-photo" src="<?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>"></img>
         <div class="nav-user">           <?php
             if(isset($_SESSION['name'])){
                 echo$_SESSION['name'];
@@ -172,6 +183,23 @@
             // Zero cents -> "R$ 1.234.567.890,00"
             zeroCents: false
         });
+    </script>
+    <script>
+        function previewFile(input) {
+        const [file] = input.files
+        const preview = document.getElementById('preview')
+        const reader = new FileReader()
+        srcBase64 = ''
+
+        reader.onload = e => {
+
+          srcBase64 = e.target.result
+          document.getElementsByClassName('fileUpload')[0].backgroundSize = '100%'
+          document.getElementsByClassName('fileUpload')[0].style.backgroundImage = "url('"+e.target.result+"')";
+        }
+
+        reader.readAsDataURL(file)
+      }
     </script>
 </body>
 

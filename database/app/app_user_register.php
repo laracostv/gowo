@@ -23,6 +23,7 @@ if (isset($_POST['nameNewUser']) && isset($_POST['newEmail']) && isset($_POST['p
 	}
 	$newEmail= trim($_POST['newEmail']);
 	$newPwd = trim($_POST['pwd']);
+	$newPwd = md5($newPwd);
 	$newDateBorn = trim($_POST['dateBorn']);
 	$newCell = trim($_POST['cell']);
 		
@@ -37,7 +38,7 @@ if (isset($_POST['nameNewUser']) && isset($_POST['newEmail']) && isset($_POST['p
         // Para a imagem do produto, primeiramente se determina qual o tipo de imagem.
         // Isso e feito atraves da obtencao da extensao do arquivo, localizada na parte
         // final do nome do arquivo (ex. ".jpg")
-        $imageFileType = strtolower(pathinfo(basename($_FILES["img"]["newName"]),PATHINFO_EXTENSION));
+        $imageFileType = strtolower(pathinfo(basename($_FILES["img"]["name"]),PATHINFO_EXTENSION));
         
         // A imagem e convertida de binario para string atraves do metodo de codificacao
         // base64
