@@ -808,3 +808,30 @@ input[type=checkbox]:checked:after {
       transform: translate(24px, 0);
     }
   }
+
+.area-header{
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    border-radius: 0px 0px 30px 30px;
+}
+
+.header-area-text{
+    color: var(--icon-white-color);
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.area-header i{
+    color: var(--icon-white-color);
+    font-size: 42px;
+}
+
+.feather-icon-header{
+    color: var(--icon-white-color);
+    width: 42px;
+    height: 42px;
+}

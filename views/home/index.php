@@ -1,9 +1,12 @@
 <?php 
     session_start();
     include_once('../../database/list_user_address.php');
+    include_once('../../database/list_all_local_services.php');
     
     $adJsonArr = json_decode($address_json, true);
     $adrState = $adJsonArr['success'][0];
+
+    $localServiceJsonArr = json_decode($services_json, true);
 ?>
 <!DOCTYPE html>
 <html lang="pt_br">
@@ -217,74 +220,34 @@
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
+
         <div class="row">
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../assets/images/users/profile_photos/cabeca-de-ideias.png">
-                <div class="info-list">
-                    <p class="title-list">Cabeça de Ideias</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>5.0 &middot; Design</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
+        <?php 
+            foreach($localServiceJsonArr['services'] as $arr){
+                //echo$arr['adName'];
 
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../assets/images/partners_brand/1.jpg">
-                <div class="info-list">
-                    <p class="title-list">Confiance</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.9 &middot; Automotivo</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../assets/images/partners_brand/2.jpg">
-                <div class="info-list">
-                    <p class="title-list">CLIMEV</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.9 &middot; Cuidados Pet</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list">
-                <img class="img-list-service" src="../../assets/images/partners_brand/3.jpg">
-                <div class="info-list">
-                    <p class="title-list">Casa do Mecânico</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.7 &middot; Automotivo</p>
-                    </div>
-                    <p class="loc-list">Laranjeiras - Serra</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list box-list-disabled">
-                <img class="img-list-service" src="../../assets/images/partners_brand/5.jpg">
-                <div class="info-list">
-                    <div class="disbaled-list-tag">Indisponível</div>
-                    <p class="title-list">Vertical Jardinagem</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.5 &middot; Design</p>
-                    </div>
-                    <p class="loc-list">Bento Ferreira - Vitória</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-12 lg-6 xg-6 box-list box-list-disabled">
-                <img class="img-list-service" src="../../assets/images/partners_brand/6.jpg">
-                <div class="info-list">
-                    <div class="disbaled-list-tag">Indisponível</div>
-                    <p class="title-list">Lorenna Monteil</p>
-                    <div class="list-cat-star">
-                        <p class="cat-list"><i data-feather="star" class="star-list"></i>4.9 &middot; Beleza</p>
-                    </div>
-                    <p class="loc-list">Jardim Camburi - Vitória</p>
-                </div>
-            </div>
+                echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
+                            <a href="user/'.$arr['idUsr'].'">
+                                <div class="box-list">
+                                    <img class="img-list-service" src="'.$arr['userDoProfilePhoto'].'">
+                                        <div class="info-list">
+                                            <p class="title-list">'.$arr['userDoName'].'</p>
+                                            <div class="list-cat-star">
+                                                <p class="cat-list"><i data-feather="star" class="star-list"></i>5.0 &middot; '.$arr['sClass'].'</p>
+                                            </div>
+                                            <p class="loc-list">'.$arr['sNbh'].' - '.$arr['sCity'].'</p>
+                                        </div>
+                                </div>
+                            </a>
+                        </div>
+                    ';
+            }
+            if(isset($localServiceJsonArr['message'])){
+                echo'<div class="xs-12 sm-12 md-12 lg-12 xg-12 warning-message-service">
+                        <center><h2>'.$localServiceJsonArr['message'].'</h2></center>
+                    </div>';
+            }
+            ?>
         </div>
     </div>
 
@@ -445,7 +408,7 @@
         ?>
         </div>
         <div class="modal-footer">
-            <button class="modal-btn">+ Adicionar novo</button>
+            <a href="local"><button class="modal-btn">+ Adicionar novo</button></a>
         </div>
     </div>
     <!--FIM DO MODAL-->

@@ -5,6 +5,13 @@
     margin: 0 auto;
 }
 
+.container-no-padings{
+    max-width: 1200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0 auto;
+}
+
 @media (min-width: 992px) and (max-width: 1400px){
     .container{
         padding-left: 120px;

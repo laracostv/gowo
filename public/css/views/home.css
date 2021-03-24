@@ -1,6 +1,11 @@
 #top-content{
     transition: all 0.4s ease;
 }
+
+.no-decoration a{
+    text-decoration: none!important;
+}
+
 .top-bar-info{
     display: flex;
     justify-content: space-between;
@@ -295,6 +300,9 @@
     font-size: 42px;
 }
 
+.warning-message-service h2{
+    text-align: center!important;
+}
 /*cad serviço*/
 
 .no-price{
