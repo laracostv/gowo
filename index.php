@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if(isset($_SESSION['email'])){
+    header('Location: views/home');
+}
+
+  $erro = isset($_GET['erro']) ? $_GET['erro'] : 0;
+?>
 <html>
 
 <head>
