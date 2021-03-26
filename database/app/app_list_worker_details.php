@@ -2,8 +2,8 @@
 $link = '';
 // array que guarda a resposta da requisicao
 $servicesList = array();
-$workerSet = 18;//$_GET['worker'];//pega o id do prestador de serviço
-$workerCat = 'Automotivo';//$_GET['category'];//pega a categoria do prestador de serviço
+$workerSet = $_GET['worker'];//pega o id do prestador de serviço
+$workerCat = $_GET['category'];//pega a categoria do prestador de serviço
 $posi = 0;
 $finded = false;
 
