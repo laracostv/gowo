@@ -2,7 +2,7 @@
 <html lang="pt_br">
 
 <head>
-    <title>GoWo</title>
+    <title>Adicionar Local</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/brand/icons/apple-touch-icon.png">
@@ -20,6 +20,8 @@
     <script src="../../../public/js/navigation.js"></script>
     <script src="../../../public/js/interactions.js"></script>
     <script src="../../../public/js/vanilla-masker.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../../../public/js/local.js"></script>
     <!--ICONS-->
     <!--<script src="https://unpkg.com/feather-icons"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -30,6 +32,7 @@
 </head>
 
 <body>
+
     <!--Page loader-->
     <div class="lds-ellipsis" id="lds-ellipsis">
         <div></div>
@@ -37,6 +40,8 @@
         <div></div>
         <div></div>
     </div>
+
+
     <div class="container" style="padding: 0px;">
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
@@ -55,15 +60,15 @@
                 <br>
                 <br>
                 <form id="address_form" method="post">
-                    <input class="normal-input" id="cep" type="tel" placeholder="Digite seu CEP" name="cep"
-                        maxlength="9" required>
-                    <div class="loading-div">
+                    <input class="normal-input" id="txtCep" type="tel" placeholder="Digite seu CEP" name="txtCep"
+                        maxlength="9" onchange="callFunctionCep()" required>
+                    <div class="loading-div" id="loading-div">
                         <div class="lds-dual-ring"></div>
                     </div>
-                    <div class="hidden-before-cep">
+                    <div class="hidden-before-cep" id="hidden-before-cep">
                         <input class="normal-input" id="address" type="text" placeholder="Endereço" name="address"
                             required>
-                        <input class="normal-input" id="number" type="tel" placeholder="Número" name="number" required>
+                        <input class="normal-input" id="number" type="tel" placeholder="Número" name="numberAdr" required>
                         <input class="normal-input" id="nbh" type="text" placeholder="Bairro" name="nbh" required>
                         <input class="normal-input" id="city" type="text" placeholder="Cidade" name="city" required>
                         <select class="normal-input" name="state" id="state" required>
@@ -98,15 +103,14 @@
                         </select>
                         <input class="normal-input" id="compl" type="text" placeholder="Complemento" name="compl"
                             required>
-                        <button class="btn-default btn-complete">Adicionar endereço</button>
+                        <button class="btn-default btn-complete" id="addAddress" disabled>Adicionar endereço</button>
                     </div>
+                    <p class="cep-discover" onclick="discoverCEP_input()">Não sei meu CEP</p>
                 </form>
 
-                <p class="cep-discover">Não sei meu CEP</p>
-
                 <div class="adr_search_form">
-                    <form id="address_search_form" method="post">
-                        <select class="normal-input" name="state_search" id="state_search" required>
+                    <form id="address_search_form">
+                        <select class="normal-select" name="state_search" id="state_search" required>
                             <option value="N">Estado</option>
                             <option value="AC">Acre</option>
                             <option value="AL">Alagoas</option>
@@ -140,8 +144,39 @@
                             required>
                         <input class="normal-input" id="nbh_search" type="text" placeholder="Endereço"
                             name="city_search" required>
-                        <button class="btn-default btn-complete">Consultar</button>
                     </form>
+                    
+                    <button class="btn-default btn-complete" disabled="true" id="btn-consult" onclick="searchCEP()">Consultar</button>
+
+                    <!--LOADER-->
+                    <center>
+                        <div id="point-loader">
+                            <div class="lds-dual-ring"></div>
+                        </div>
+                    </center>
+                    <!--EXIBINDO RESULTADOS ENCONTRADOS-->
+                    <div class="searchResults" id="results">
+                            <div class="set-text" id="result-text">RESULTADOS ENCONTRADOS</div>
+                            <div class="sub-text">Clique em um endereço para cadastra-lo</div>
+                            <div class="list_results" id="list_results">
+                            </div>
+                    </div>
+
+                    <!--CASO NÃO ENCONTRE-->
+
+                    <div id="error-mensage-search">
+                            <center>
+                                <img src="../../../assets/images/all-images/location-loader2.gif" id="error-gif" class="error-gif" draggable="false">
+                            </center>
+                                <div class="txt-error">NÃO ENCONTREI :(</div>
+                                <br>
+                                <div class="dsc-error">Mas calma! Aqui estão algumas recomendações para você:</div>
+                                <div class="dsc-error">1. Preencheu todos os campos corretamente?</div>
+                                <div class="dsc-error">2. O capos estão sem espaços, letras, caracteres sobrando, nada de estranho?</div>
+                                <div class="dsc-error">3. Preencha novamente e tenta só pra garantir ;)</div>
+                                <div class="dsc-error">4. Recarregue a página</div>
+                                <div class="dsc-error">5. Nos mande uma mensagem <a href="../../profile/pages/suport" style="color: #00a39b; font-weight: bold;">aqui</a></div>
+                    </div>
                 </div>
 
             </div>
@@ -149,6 +184,9 @@
         </div>
     </div>
 
+    <input type="button" id='myHiddenButtonEnd' visible='false' onclick="javascript:doFocus(1);" width='1px' style="display:none">
+    <input type="button" id='myHiddenButtonNmr' visible='false' onclick="javascript:doFocus(2);" width='1px' style="display:none">
+    <div class="height-60"></div>
     <!--NAV DESKTOP-->
     <div class="v-nav">
         <img class="profile-nav-photo" src="../../../assets/images/users/profile_photos/user.png"></img>
@@ -165,7 +203,7 @@
                 <div class="v-nav-item-name">Chat</div>
             </div>
         </div>
-        <div class="nav-item-square " onclick="navRedSecond(3)">
+        <div class="nav-item-square" onclick="navRedSecond(3)">
             <div>
                 <center><i data-feather="bell" class="v-nav-icon"></i></center>
                 <div class="v-nav-item-name">Recentes</div>
@@ -186,9 +224,14 @@
         window.addEventListener("load", function (event) {
             document.getElementById('lds-ellipsis').style.display = 'none';
         });
-        VMasker(document.getElementById("cep")).maskPattern('99999-9999');
+        VMasker(document.getElementById("txtCep")).maskPattern('99999-9999');
+
+        $( "#txtCep" ).keyup(function() {
+            callFunctionCep()
+        });
     </script>
     <script src="../../../public/js/theme.js"></script>
+
 </body>
 
 </html>

@@ -117,7 +117,7 @@
         </div>
         </div>
         <div style="height: 40px"></div>
-        <center>Gowo &middot v0.3</center>
+        <center>Gowo &middot v0.5</center>
         <div style="height: 80px"></div>
     </div>
 

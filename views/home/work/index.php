@@ -3,6 +3,9 @@
     if(!isset($_SESSION['email'])){
             header('Location: ../.././../index.php?erro=2');
     }
+
+    include_once('../../../database/list_user_address.php');
+    $adJsonArr = json_decode($address_json, true);
 ?>
 <!DOCTYPE html>
 <html lang="pt_br">
@@ -33,7 +36,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!--<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>-->
-    <script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -68,20 +70,25 @@
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-no-padings">
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-3 xg-3"></div>
             <div class="xs-12 sm-12 md-12 lg-6 xg-6">
                 <br>
-                <form id="partner_form" method="post">
+                <form id="partner_form" method="post" action="../../../database/create_service.php" enctype="multipart/form-data">
+
+                    <center>
                     <div class="fileUpload">
-                        <input type="file" name="arquivo" id="up_image" class="upload" onchange="previewFile(this);" required/>
+                        <input type="file" name="arquivo" id="up_image" class="upload" onchange="previewFile(this);" accept=".png, .jpg, .jpeg" required/>
                     </div>
-                    <input class="normal-input" id="name" type="text"
-                        placeholder="Título do serviço ex.: Faxina, Brigadeiros, Conserto de celular... " name="name"
+                    </center>
+
+                    <input class="normal-input" id="service_name" type="text"
+                        placeholder="Título do serviço ex.: Faxina, Brigadeiros, Conserto de celular... " name="service_name"
                         required>
-                    <select class="normal-input" placeholder="Categoria" name="Category" id="category" required>
-                        <option value="False">Escolha uma categoria</option>
+
+                    <select class="normal-input" placeholder="Categoria" name="category" id="category" required>
+                        <option value="False" disabled selected>Escolha uma categoria</option>
                         <option value="Automotivo">Automotivo</option>
                         <option value="Beleza">Beleza</option>
                         <option value="Comida">Comida</option>
@@ -94,17 +101,22 @@
                         <option value="Limpeza">Limpeza</option>
                         <option value="Reformas e Consertos">Reformas e Consertos</option>
                     </select>
-                    <select class="normal-input" placeholder="Categoria" name="Category" id="category" required>
-                        <option value="False">Lozalização base</option>
-                        <option value="Automotivo">Rua Arlinda Correa de Jesus, 90, Jardim Camburi - Vitória - ES</option>
-                        <option value="Beleza">Casa da Namorada</option>
+                    <select class="normal-input" placeholder="Localização" name="adr" id="adr" required>
+                        <option value="False" disabled selected>Lozalização base</option>
+                        <?php 
+
+                        foreach($adJsonArr['address_user'] as $arr){
+                            //echo$arr['adName'];
+                            echo'<option value="'.$arr['idAdress'].'">'.$arr["adName"].' | '.$arr['adAddress'].', '.$arr["adNumber"].', '.$arr["adNbh"].' - '.$arr["adCity"].'</option>';
+                        }
+                        ?>
                     </select>
-                    <textarea class="normal-textarea" maxlength="900"
+                    <textarea name="desc" id="desc" class="normal-textarea" maxlength="900"
                         placeholder="Descreva sua atividade..."></textarea>
-                    <input class="normal-input" type="tel" placeholder="Valor" name="value" id="val"
-                        style="max-width: 150px; font-weight: 900;" required>
+                    <input class="normal-input" type="tel" placeholder="Valor" name="val" id="val"
+                        style="max-width: 150px; font-weight: 900;">
                     <div class="no-price">
-                        <input type="checkbox" id="noPrice"><label for="noPrice">Sem valor definido</label>
+                        <input type="checkbox" id="noPrice" name="noPrice"><label for="noPrice">Sem valor definido</label>
                     </div>
                     <br>
                     <button class="btn-default btn-complete" onclick="input_check()">Cadastrar</button>
@@ -118,14 +130,17 @@
 
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="<?php
+        <img class="profile-nav-photo" src="
+                <?php
                     if(isset($_SESSION['profile_photo'])){
                         echo$_SESSION['profile_photo'];
                     }else{
                         echo"../../assets/images/users/profile_photos/user.png";
                     }
-                ?>"></img>
-        <div class="nav-user">           <?php
+                ?>">
+                </img>
+        <div class="nav-user">
+            <?php
             if(isset($_SESSION['name'])){
                 echo$_SESSION['name'];
             }else{
@@ -193,8 +208,8 @@
 
         reader.onload = e => {
 
-          srcBase64 = e.target.result
-          document.getElementsByClassName('fileUpload')[0].backgroundSize = '100%'
+          srcBase64 = e.target.result;
+          document.getElementsByClassName('fileUpload')[0].style.backgroundSize = 'cover';
           document.getElementsByClassName('fileUpload')[0].style.backgroundImage = "url('"+e.target.result+"')";
         }
 
