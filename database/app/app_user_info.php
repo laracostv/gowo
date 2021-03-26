@@ -6,11 +6,11 @@
     require_once('../db.class.php');
     $objDb = new db();
     $link = $objDb->mysql_connect();
-/*
+
     if(isset($_GET['id_user'])){
-        $idUserSet = $_GET['id_user'];*/
+        $idUserSet = $_GET['id_user'];/*
     $idUserSet = 18;
-    if(isset($idUserSet)){
+    if(isset($idUserSet)){*/
         $array_result = array();
         
         $search_image = mysqli_query($link, "SELECT idUser, usrName, usrCellPhone, usrProfilePhoto FROM users WHERE idUser = '$idUserSet'");
