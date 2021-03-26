@@ -2,8 +2,10 @@
 $link = '';
 // array que guarda a resposta da requisicao
 $servicesList = array();
-$workerSet = $_GET['worker'];//pega o id do prestador de serviço
-$workerCat = $_GET['category'];//pega a categoria do prestador de serviço
+$workerSet = 18;//$_GET['worker'];//pega o id do prestador de serviço
+$workerCat = 'Automotivo';//$_GET['category'];//pega a categoria do prestador de serviço
+$posi = 0;
+$finded = false;
 
 require_once('../db.class.php');
 $objDb = new db();
@@ -13,6 +15,11 @@ $result = mysqli_query($link, "SELECT * FROM services WHERE idUserDo = '$workerS
 
 $servicesList["servicesWorker"] = array();
 
+//consulta toda tabela de enderecos
+$response["services"] = array();
+$result_address = mysqli_query($link, "SELECT idAdress, adNbh, adCity, adState FROM address");
+$addressArray = $result_address->fetch_all();
+
 while ($row = mysqli_fetch_array($result)) {
     $servicesDetails = array();
     $servicesDetails["idUserDo"] = $workerSet;
@@ -21,6 +28,22 @@ while ($row = mysqli_fetch_array($result)) {
     $servicesDetails["servicePhoto"] = $row["sPhoto"];
     //$serviceDesc = $row["sDesc"];
     $servicesDetails["serviceVal"] = $row["sVal"];
+
+    $servicesAddressId = $row["sAdressId"];
+
+    while($finded == false){
+        if($addressArray[$posi][0] == $servicesAddressId){
+            //print_r($addressArray[$posi]);
+            $servicesDetails['sNbh'] = $addressArray[$posi][1];
+            $servicesDetails['sCity'] = $addressArray[$posi][2];
+            $servicesDetails['sState'] = $addressArray[$posi][3];
+            $finded = true;
+        }                    
+        //echo $adLineInfo;
+        $posi++;
+    }
+    $posi = 0;
+    $finded = false;
     array_push($servicesList["servicesWorker"], $servicesDetails);
 }
 
