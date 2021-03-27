@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt_br">
 
@@ -22,14 +26,25 @@
     <script src="../../../public/js/vanilla-masker.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../../../public/js/local.js"></script>
+    <script src="../../../public/js/theme.js"></script>
     <!--ICONS-->
     <!--<script src="https://unpkg.com/feather-icons"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
 </head>
+<!--THEME COOKIE-->
+<?php
+        if (isset($_COOKIE["theme"])){
+            $themeCookie = $_COOKIE['theme'];
+            
+            if($themeCookie == 'dark'){
+                echo '<script>darkTheme();</script>';
+            }
+        }
+?>
 
 <body>
 
@@ -59,16 +74,40 @@
             <div class="xs-12 sm-12 md-8 lg-6 xg-6">
                 <br>
                 <br>
-                <form id="address_form" method="post">
+                <form id="address_form" method="POST" action="../../../database/insert_address.php">
                     <input class="normal-input" id="txtCep" type="tel" placeholder="Digite seu CEP" name="txtCep"
                         maxlength="9" onchange="callFunctionCep()" required>
                     <div class="loading-div" id="loading-div">
                         <div class="lds-dual-ring"></div>
                     </div>
+                    <div id="incorrect-cep">
+                        Ops... parece que não encontramos este CEP
+                    </div>
+
+                    <!--MODAL Welcome-->
+                    <div class="modal-area"
+                        onclick="this.style.display='none'; document.getElementById('modal-local').style.display='none'">
+                    </div>
+
+                    <div class="modal-box" id="modal-local">
+                        <i class="close-modal" data-feather="x" onclick="modalClose(this, 0)"></i>
+                        <div style="max-width: 260px; max-height: 240px" id="local-lottie"></div>
+                        <div class="modal-title">Adione um apelido</div>
+                        <p class="modal-text">Adione um nome personalizado para poder identificar mais facilmente o
+                            endereço (isso estará visível somente para você)</p>
+                        <br>
+                        <input class="normal-input" id="adName" type="text"
+                            placeholder="Ex: Minha casa, trabalho, faculdade..." name="adName" required>
+                        <div class="modal-footer">
+                            <input type="submit" value="Salvar endereço" class="modal-btn"></input>
+                        </div>
+                    </div>
+
                     <div class="hidden-before-cep" id="hidden-before-cep">
                         <input class="normal-input" id="address" type="text" placeholder="Endereço" name="address"
                             required>
-                        <input class="normal-input" id="number" type="tel" placeholder="Número" name="numberAdr" required>
+                        <input class="normal-input" id="number" type="tel" placeholder="Número" name="numberAdr"
+                            required>
                         <input class="normal-input" id="nbh" type="text" placeholder="Bairro" name="nbh" required>
                         <input class="normal-input" id="city" type="text" placeholder="Cidade" name="city" required>
                         <select class="normal-input" name="state" id="state" required>
@@ -101,9 +140,10 @@
                             <option value="SE">Sergipe</option>
                             <option value="TO">Tocantins</option>
                         </select>
-                        <input class="normal-input" id="compl" type="text" placeholder="Complemento" name="compl"
-                            required>
-                        <button class="btn-default btn-complete" id="addAddress" disabled>Adicionar endereço</button>
+                        <input class="normal-input" id="compl" type="text" placeholder="Complemento" name="compl">
+                        <button class="btn-default btn-complete" id="addAddress" disabled name="Adicionar
+                        endereço" onclick="open_modal('modal-local', '0')">Adicionar
+                            endereço</button>
                     </div>
                     <p class="cep-discover" onclick="discoverCEP_input()">Não sei meu CEP</p>
                 </form>
@@ -145,8 +185,9 @@
                         <input class="normal-input" id="nbh_search" type="text" placeholder="Endereço"
                             name="city_search" required>
                     </form>
-                    
-                    <button class="btn-default btn-complete" disabled="true" id="btn-consult" onclick="searchCEP()">Consultar</button>
+
+                    <button class="btn-default btn-complete" disabled="true" id="btn-consult"
+                        onclick="searchCEP()">Consultar</button>
 
                     <!--LOADER-->
                     <center>
@@ -156,26 +197,29 @@
                     </center>
                     <!--EXIBINDO RESULTADOS ENCONTRADOS-->
                     <div class="searchResults" id="results">
-                            <div class="set-text" id="result-text">RESULTADOS ENCONTRADOS</div>
-                            <div class="sub-text">Clique em um endereço para cadastra-lo</div>
-                            <div class="list_results" id="list_results">
-                            </div>
+                        <div class="set-text" id="result-text">RESULTADOS ENCONTRADOS</div>
+                        <div class="sub-text">Clique em um endereço para cadastra-lo</div>
+                        <div class="list_results" id="list_results">
+                        </div>
                     </div>
 
                     <!--CASO NÃO ENCONTRE-->
 
                     <div id="error-mensage-search">
-                            <center>
-                                <img src="../../../assets/images/all-images/location-loader2.gif" id="error-gif" class="error-gif" draggable="false">
-                            </center>
-                                <div class="txt-error">NÃO ENCONTREI :(</div>
-                                <br>
-                                <div class="dsc-error">Mas calma! Aqui estão algumas recomendações para você:</div>
-                                <div class="dsc-error">1. Preencheu todos os campos corretamente?</div>
-                                <div class="dsc-error">2. O capos estão sem espaços, letras, caracteres sobrando, nada de estranho?</div>
-                                <div class="dsc-error">3. Preencha novamente e tenta só pra garantir ;)</div>
-                                <div class="dsc-error">4. Recarregue a página</div>
-                                <div class="dsc-error">5. Nos mande uma mensagem <a href="../../profile/pages/suport" style="color: #00a39b; font-weight: bold;">aqui</a></div>
+                        <center>
+                            <div style="max-width: 200px; max-height: 200px" id="not-found-local"></div>
+                        </center>
+                        <div class="txt-error">Não encontrei :(</div>
+                        <br>
+                        <div class="dsc-error">Mas calma! Aqui estão algumas recomendações para você:</div>
+                        <div class="dsc-error">1. Preencheu todos os campos corretamente? Não é necessário inserir a
+                            referência: rua ou avenida</div>
+                        <div class="dsc-error">2. O campos estão sem espaços, letras, caracteres sobrando, nada de
+                            estranho?</div>
+                        <div class="dsc-error">3. Preencha novamente e tenta só pra garantir ;)</div>
+                        <div class="dsc-error">4. Recarregue a página</div>
+                        <div class="dsc-error">5. Nos mande uma mensagem <a href="../../profile/suport"
+                                style="color: #00a39b; font-weight: bold;">aqui</a></div>
                     </div>
                 </div>
 
@@ -184,13 +228,30 @@
         </div>
     </div>
 
-    <input type="button" id='myHiddenButtonEnd' visible='false' onclick="javascript:doFocus(1);" width='1px' style="display:none">
-    <input type="button" id='myHiddenButtonNmr' visible='false' onclick="javascript:doFocus(2);" width='1px' style="display:none">
+    <input type="button" id='myHiddenButtonEnd' visible='false' onclick="javascript:doFocus(1);" width='1px'
+        style="display:none">
+    <input type="button" id='myHiddenButtonNmr' visible='false' onclick="javascript:doFocus(2);" width='1px'
+        style="display:none">
     <div class="height-60"></div>
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="../../../assets/images/users/profile_photos/user.png"></img>
-        <div class="nav-user">Usuário</div>
+        <img class="profile-nav-photo" src="
+                <?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>">
+        </img>
+        <div class="nav-user">
+            <?php
+            if(isset($_SESSION['name'])){
+                echo$_SESSION['name'];
+            }else{
+                echo"<a href='../../'>Entrar</a> ou <a href='../../views/initial/signup'>Cadastrar</a>";
+            }
+        ?></div>
         <div class="nav-item-square active-v-nav" onclick="navRedSecond(1)">
             <div>
                 <i data-feather="home" class="v-nav-icon"></i>
@@ -219,19 +280,37 @@
     </div>
 
     <script>
-        feather.replace();
-        //open_modal('modal-welcome');
-        window.addEventListener("load", function (event) {
-            document.getElementById('lds-ellipsis').style.display = 'none';
-        });
-        VMasker(document.getElementById("txtCep")).maskPattern('99999-9999');
+    feather.replace();
+    //open_modal('modal-welcome');
+    window.addEventListener("load", function(event) {
+        document.getElementById('lds-ellipsis').style.display = 'none';
+    });
+    VMasker(document.getElementById("txtCep")).maskPattern('99999-9999');
 
-        $( "#txtCep" ).keyup(function() {
-            callFunctionCep()
-        });
+    $("#txtCep").keyup(function() {
+        callFunctionCep()
+    });
+
+    var animation = bodymovin.loadAnimation({
+        // animationData: { /* ... */ },
+        container: document.getElementById('local-lottie'), // required
+        path: '../../../assets/images/ui/lottie/lf20_sj0skmmg.json', // required
+        renderer: 'svg', // required
+        loop: true, // optional
+        autoplay: true, // optional
+        name: "local", // optional
+    });
+
+    var animation2 = bodymovin.loadAnimation({
+        // animationData: { /* ... */ },
+        container: document.getElementById('not-found-local'), // required
+        path: '../../../assets/images/ui/lottie/map-pin-jump.json', // required
+        renderer: 'svg', // required
+        loop: true, // optional
+        autoplay: true, // optional
+        name: "local", // optional
+    });
     </script>
-    <script src="../../../public/js/theme.js"></script>
-
 </body>
 
 </html>

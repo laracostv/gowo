@@ -112,6 +112,7 @@ a{
     text-indent: 8px;
     margin-top: 5px;
     margin-bottom: 5px;
+    border: 2px solid var(--input-color);
 }
 
 .btn-default:disabled{
@@ -712,6 +713,7 @@ input[type=checkbox]:checked:after {
     margin-right: 4px;
     margin-left: 4px;
     cursor: pointer;
+    text-align: center;
 }
 
 .modal-btn-outline{

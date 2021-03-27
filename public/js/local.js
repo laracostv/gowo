@@ -10,7 +10,7 @@ var listEnd = []
 
 function callFunctionCep() {
     var size = $('#txtCep').val().length;
-    console.log('chamou');
+    //console.log('chamou');
     if (size == 9) {
         consultCep();
         $('#txtCep').blur();
@@ -41,7 +41,7 @@ function consultCep() {
                 var lograd = data.logradouro;
                 var bair = data.bairro;
                 $('#loading-div').hide();
-                $('#incorret-cep').hide();
+                $('#incorrect-cep').hide();
                 $('#hidden-before-cep').fadeIn();
                 $('#txtCep').removeClass('invalid-feedback-box')
                 $('#instructions').hide()
@@ -103,7 +103,7 @@ function doFocus(id) {
 
 function errorCepReturn() {
     $('#loading-div').hide();
-    $('#incorret-cep').show();
+    $('#incorrect-cep').show();
     $('#hidden-before-cep').fadeOut();
     $('#txtCep').addClass('invalid-feedback-box')
 }
