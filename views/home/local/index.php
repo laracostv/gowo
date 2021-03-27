@@ -97,7 +97,8 @@
                             endereço (isso estará visível somente para você)</p>
                         <br>
                         <input class="normal-input" id="adName" type="text"
-                            placeholder="Ex: Minha casa, trabalho, faculdade..." name="adName" required>
+                            placeholder="Ex: Minha casa, trabalho, faculdade..." name="adName" autocomplete="off"
+                            required>
                         <div class="modal-footer">
                             <input type="submit" value="Salvar endereço" class="modal-btn"></input>
                         </div>

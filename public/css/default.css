@@ -626,6 +626,7 @@ input[type=checkbox]:checked:after {
     top: 0px;
     z-index: 1100;
     display: none;
+    left: 0px;
 }
 
 .modal-box{

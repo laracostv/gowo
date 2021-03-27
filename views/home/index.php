@@ -35,7 +35,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!--<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>-->
-    <script src="https://cdnjs.com/libraries/bodymovin" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
     <!--FONTS-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -141,7 +140,7 @@
                     </div>
                 </a>
 
-                <a href="category/?category=beleza&icon=fas%20fa-heart">    
+                <a href="category/?category=beleza&icon=fas%20fa-heart">
                     <div class='middle-col-alig'>
                         <div class="category-square">
                             <div class="category-circle">
@@ -152,7 +151,7 @@
                     </div>
                 </a>
 
-                <a href="category/?category=cuidados%20pet&icon=fas%20fa-paw"> 
+                <a href="category/?category=cuidados%20pet&icon=fas%20fa-paw">
                     <div class='middle-col-alig'>
                         <div class="category-square">
                             <div class="category-circle">
@@ -222,7 +221,7 @@
         </div>
 
         <div class="row">
-        <?php 
+            <?php 
             foreach($localServiceJsonArr['services'] as $arr){
                 //echo$arr['adName'];
 
@@ -347,7 +346,7 @@
             <div class="md-3 center-x-y height-60" onclick="navRed(20)">
                 <div>
                     <center><i data-feather="search" class="nav-icon"></i></center>
-                    <div class="text-nav">Buscar</div>                   
+                    <div class="text-nav">Buscar</div>
                     <!--<div class="chat-notification">10</div>-->
                 </div>
             </div>
@@ -374,7 +373,7 @@
         <div class="modal-title">Olá Usuário!</div>
         <p class="modal-text">Seja bem-vindo(a) a plataforma que vai revolucionar as interações de trabalho.</p>
         <div class="modal-footer">
-            <button class="modal-btn">Vamos lá</button>
+            <button class="modal-btn" onclick="modalClose(this, 0)">Vamos lá</button>
         </div>
     </div>
     <!--FIM DO MODAL-->
@@ -387,7 +386,7 @@
         <i class="close-modal" data-feather="x" onclick="modalClose(this, 1)"></i>
         <div class="modal-title">Endereços</div>
         <div class="modal-body a-no-decoration">
-        <?php 
+            <?php 
         foreach($adJsonArr['address_user'] as $arr){
             //echo$arr['adName'];
             echo'<a href="../../database/choose_active_address.php?address='.$arr["idAdress"].'">
@@ -414,85 +413,89 @@
     <!--FIM DO MODAL-->
 
     <script>
-        function order_list_display(id) {
-            if (id == 0) {
-                document.getElementById('list-mobile').style.display = "none";
-            }
-            if (id == 1) {
-                document.getElementById('list-mobile').style.display = "block";
-            }
+    function order_list_display(id) {
+        if (id == 0) {
+            document.getElementById('list-mobile').style.display = "none";
         }
-
-        const list = {
-            open: false,
-            bottomCartBar: document.getElementsByClassName('bottom-cart-bar')[0],
-            mobileDetails: document.getElementById('mobile-details-list'),
-            mobileDetailsFixed: document.getElementById('mobile-details-fixed'),
-            listMobile: document.getElementById('list-mobile'),
-            headerDetailsListMobile: document.getElementById('header-details-list-mobile')
+        if (id == 1) {
+            document.getElementById('list-mobile').style.display = "block";
         }
+    }
 
-        function open_list() {
-            if (list.open === false) {
-                const height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
-                list.bottomCartBar.style.height = `${height - 55}px`;
-                list.mobileDetails.style.display = 'block';
-                list.mobileDetailsFixed.style.display = 'none';
-                list.listMobile.style.background = 'var(--bg-default)';
-                list.open = true;
+    const list = {
+        open: false,
+        bottomCartBar: document.getElementsByClassName('bottom-cart-bar')[0],
+        mobileDetails: document.getElementById('mobile-details-list'),
+        mobileDetailsFixed: document.getElementById('mobile-details-fixed'),
+        listMobile: document.getElementById('list-mobile'),
+        headerDetailsListMobile: document.getElementById('header-details-list-mobile')
+    }
 
-            } else {
-                list.bottomCartBar.style.height = '40px';
-                list.mobileDetails.style.display = 'none';
-                list.mobileDetailsFixed.style.display = 'flex';
-                list.mobileDetailsFixed.style.justifyContent = 'space-between';
-                list.mobileDetailsFixed.style.backgroundColor = 'var(--bg-color)';
-                list.listMobile.style.background = 'var(--bg-color)';
-                list.open = false;
-            }
+    function open_list() {
+        if (list.open === false) {
+            const height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
+            list.bottomCartBar.style.height = `${height - 55}px`;
+            list.mobileDetails.style.display = 'block';
+            list.mobileDetailsFixed.style.display = 'none';
+            list.listMobile.style.background = 'var(--bg-default)';
+            list.open = true;
+
+        } else {
+            list.bottomCartBar.style.height = '40px';
+            list.mobileDetails.style.display = 'none';
+            list.mobileDetailsFixed.style.display = 'flex';
+            list.mobileDetailsFixed.style.justifyContent = 'space-between';
+            list.mobileDetailsFixed.style.backgroundColor = 'var(--bg-color)';
+            list.listMobile.style.background = 'var(--bg-color)';
+            list.open = false;
         }
+    }
 
-        feather.replace();
-        order_list_display(0)
-        //open_modal('modal-welcome', '0')
-
+    feather.replace();
+    order_list_display(0)
+    //open_modal('modal-welcome', '0')
     </script>
+    <?php
+        $message = isset($_GET['message']) ? $_GET['message'] : 0;
+        if($message=0){
+                print_r("<script>alert('open_modal('modal-welcome', '0')')</script>");
+            }
+        ?>
     <script>
-        var animation = bodymovin.loadAnimation({
-            // animationData: { /* ... */ },
-            container: document.getElementById('welcome-lottie'), // required
-            path: '../../assets/images/ui/lottie/welcome-gears-jobs.json', // required
-            renderer: 'svg', // required
-            loop: true, // optional
-            autoplay: true, // optional
-            name: "Welcome", // optional
-        });
-        window.addEventListener("load", function (event) {
-            document.getElementById('lds-ellipsis').style.display = 'none';
-        });
+    var animation = bodymovin.loadAnimation({
+        // animationData: { /* ... */ },
+        container: document.getElementById('welcome-lottie'), // required
+        path: '../../assets/images/ui/lottie/welcome-gears-jobs.json', // required
+        renderer: 'svg', // required
+        loop: true, // optional
+        autoplay: true, // optional
+        name: "Welcome", // optional
+    });
+    window.addEventListener("load", function(event) {
+        document.getElementById('lds-ellipsis').style.display = 'none';
+    });
 
-        function showUI() {
-            document.getElementById('mob-nav').style.display = 'block';
-            showContent();
-            order_list_display(1);
-        }
+    function showUI() {
+        document.getElementById('mob-nav').style.display = 'block';
+        showContent();
+        order_list_display(1);
+    }
 
-        function hideUI() {
-            document.getElementById('mob-nav').style.display = 'none';
-            hideContent();
-            order_list_display(0);
-        }
+    function hideUI() {
+        document.getElementById('mob-nav').style.display = 'none';
+        hideContent();
+        order_list_display(0);
+    }
 
-        function hideContent() {
-            document.getElementById('all-content').style.display = 'none';
-            document.getElementById('top-content').style.display = 'none';
-        }
+    function hideContent() {
+        document.getElementById('all-content').style.display = 'none';
+        document.getElementById('top-content').style.display = 'none';
+    }
 
-        function showContent() {
-            document.getElementById('all-content').style.display = 'block';
-            document.getElementById('top-content').style.display = 'block';
-        }
-
+    function showContent() {
+        document.getElementById('all-content').style.display = 'block';
+        document.getElementById('top-content').style.display = 'block';
+    }
     </script>
 </body>
 

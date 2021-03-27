@@ -51,7 +51,7 @@
         $con = mysqli_query($link, "SELECT idUserDo, sClass, sAdressId  FROM services");
         
         while ($row = mysqli_fetch_array($con, MYSQLI_ASSOC)) {
-            echo'<script>console.log("city 1")</script>';
+            //echo'<script>console.log("city 1")</script>';
             $services = array();
             $servicesIdUserDo = $row["idUserDo"];
             if(in_array($servicesIdUserDo, $userWasListed) == false){
@@ -82,11 +82,11 @@
         $con = mysqli_query($link, "SELECT idUserDo, sClass, sAdressId  FROM services");
         
         while ($row = mysqli_fetch_array($con, MYSQLI_ASSOC)) {
-            echo'<script>console.log("state 1")</script>';
+            //echo'<script>console.log("state 1")</script>';
             $services = array();
             $servicesIdUserDo = $row["idUserDo"];
             if(in_array($servicesIdUserDo, $userWasListed) == false){
-                echo'<script>console.log("state 2")</script>';
+                //echo'<script>console.log("state 2")</script>';
                 $servicesAddressId = $row["sAdressId"];
                 $result_address = mysqli_query($link, "SELECT adNbh, adCity,adState FROM address WHERE idAdress = $servicesAddressId");
                 $addressArray = mysqli_fetch_array($result_address);
@@ -95,7 +95,7 @@
                 $services["sState"] = $addressArray['adState'];
 
                 if($services["sState"] == $stateActive){
-                    echo'<script>console.log("state 3")</script>';
+                    //echo'<script>console.log("state 3")</script>';
                     $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhotoSrc FROM users WHERE idUser = $servicesIdUserDo");
                     $userDoArray = mysqli_fetch_array($result_user);
                     $services["userDoName"] = $userDoArray['usrName'];

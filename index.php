@@ -51,7 +51,7 @@ if(isset($_SESSION['email'])){
         </div>
     </center>
     <script>
-        feather.replace()
+    feather.replace()
     </script>
 </body>
 
