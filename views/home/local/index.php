@@ -1,5 +1,8 @@
 <?php
     session_start();
+    if(!isset($_SESSION['email'])){
+            header('Location: ../../../index.php?erro=2');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -92,9 +95,9 @@
                     <div class="modal-box" id="modal-local">
                         <i class="close-modal" data-feather="x" onclick="modalClose(this, 0)"></i>
                         <div style="max-width: 260px; max-height: 240px" id="local-lottie"></div>
-                        <div class="modal-title">Adione um apelido</div>
-                        <p class="modal-text">Adione um nome personalizado para poder identificar mais facilmente o
-                            endereço (isso estará visível somente para você)</p>
+                        <div class="modal-title">Adicione um apelido</div>
+                        <p class="modal-text">Com um nome personalizado você identifica facilmente o
+                            endereço (visível apenas para você)</p>
                         <br>
                         <input class="normal-input" id="adName" type="text"
                             placeholder="Ex: Minha casa, trabalho, faculdade..." name="adName" autocomplete="off"
@@ -142,9 +145,10 @@
                             <option value="TO">Tocantins</option>
                         </select>
                         <input class="normal-input" id="compl" type="text" placeholder="Complemento" name="compl">
-                        <button class="btn-default btn-complete" id="addAddress" disabled name="Adicionar
-                        endereço" onclick="open_modal('modal-local', '0')">Adicionar
-                            endereço</button>
+                        <div class="fake-btn-default disabled-fake" id="addAddress"
+                            onclick="calltoModal('modal-local', '0')">
+                            Adicionar
+                            endereço</div>
                     </div>
                     <p class="cep-discover" onclick="discoverCEP_input()">Não sei meu CEP</p>
                 </form>
@@ -241,7 +245,7 @@
                     if(isset($_SESSION['profile_photo'])){
                         echo$_SESSION['profile_photo'];
                     }else{
-                        echo"../../assets/images/users/profile_photos/user.png";
+                        echo"../../../assets/images/users/profile_photos/user.png";
                     }
                 ?>">
         </img>

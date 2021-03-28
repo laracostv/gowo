@@ -5,6 +5,11 @@
     
     $adJsonArr = json_decode($address_json, true);
     $adrState = $adJsonArr['success'][0];
+    
+    $alert = isset($_GET['alert']) ? $_GET['alert'] : 0;
+    /*if($alert == 0){
+        echo'<script>alert("oi")</script>';
+    }*/
 
     $localServiceJsonArr = json_decode($services_json, true);
 ?>
@@ -73,11 +78,20 @@
                                         echo $arr["adAddress"];
                                         echo ', ';
                                         echo $arr["adNumber"];
+                                        echo ', ';
+                                        echo $arr["adNbh"];
+                                        echo ', ';
+                                        echo $arr["adCity"];
                                     }
                                 }
                             }else{
-                                echo'Clique para adicionar local';
+                                echo'Clique para adicionar um local';
                             }
+
+                            if($_SESSION['active_adress'] == 0){
+                                echo'Clique para escolher um local';
+                            }
+                            
                         ?>" disabled="true" id="usr_location">
                         <i data-feather="chevron-down" class="user-location-icon"></i>
                     </div>
@@ -226,7 +240,7 @@
                 //echo$arr['adName'];
 
                 echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
-                            <a href="user/'.$arr['idUsr'].'">
+                            <a href="partners/?user='.$arr['idUsr'].'">
                                 <div class="box-list">
                                     <img class="img-list-service" src="../../assets/images/users/profile_photos/'.$arr['userDoProfilePhoto'].'">
                                         <div class="info-list">
@@ -370,10 +384,17 @@
     <div class="modal-box" id="modal-welcome">
         <i class="close-modal" data-feather="x" onclick="modalClose(this, 0)"></i>
         <div style="max-width: 260px; max-height: 240px" id="welcome-lottie"></div>
-        <div class="modal-title">Olá Usuário!</div>
-        <p class="modal-text">Seja bem-vindo(a) a plataforma que vai revolucionar as interações de trabalho.</p>
+        <div class="modal-title">Olá
+            <?php if(isset($_SESSION['name'])){
+                        echo$_SESSION['name'];
+                    } ?>!
+        </div>
+        <p class="modal-text">
+            Seja bem-vindo(a) a plataforma que vai revolucionar as interações de trabalho.
+            Para começar a utilizar a plataforma <b>adicone um local para procurar os serviços próximos.</b>
+        </p>
         <div class="modal-footer">
-            <button class="modal-btn" onclick="modalClose(this, 0)">Vamos lá</button>
+            <a href="local"><button class="modal-btn">Vamos lá</button></a>
         </div>
     </div>
     <!--FIM DO MODAL-->
@@ -382,6 +403,8 @@
     <div class="modal-area"
         onclick="document.getElementById('modal-adress').style.display='none'; this.style.display='none';">
     </div>
+
+    <!--ADDRESS MODAL-->
     <div class="modal-box" id="modal-adress">
         <i class="close-modal" data-feather="x" onclick="modalClose(this, 1)"></i>
         <div class="modal-title">Endereços</div>
@@ -389,19 +412,24 @@
             <?php 
         foreach($adJsonArr['address_user'] as $arr){
             //echo$arr['adName'];
-            echo'<a href="../../database/choose_active_address.php?address='.$arr["idAdress"].'">
-                    <div class="local-list">
-                        <div>
-                            <i data-feather="map-pin" class="pin-list-ad"></i>
-                        </div>
-                        <div>
-                            <p class="adress-name">'.$arr["adName"].'</p>
-                            <p class="st-name">'.$arr["adAddress"].', '.$arr["adNumber"].'</p>
-                            <p class="ad-line1">'.$arr["adNbh"].', '.$arr["adCity"].' - '.$arr["adState"].'</p>
-                            <p class="ad-line2">'.$arr["adComp"].'</p>
+            echo'<div class="local-list">
+                    <div onclick="changeAddressHref('.$arr["idAdress"].')")">
+                        <div class="innternal-block">
+                            <div>
+                                <i data-feather="map-pin" class="pin-list-ad"></i>
+                            </div>
+                            <div>
+                                <p class="adress-name">'.$arr["adName"].'</p>
+                                <p class="st-name">'.$arr["adAddress"].', '.$arr["adNumber"].'</p>
+                                <p class="ad-line1">'.$arr["adNbh"].', '.$arr["adCity"].' - '.$arr["adState"].'</p>
+                                <p class="ad-line2">'.$arr["adComp"].'</p>
+                            </div>
                         </div>
                     </div>
-                </a>
+                    <div class="edit-line-tag i-exclude" onclick="deleteAddressHref('.$arr["idAdress"].')")">
+                        <i data-feather="x"></i>
+                    </div>
+                </div>
                 ';
         }
         ?>
@@ -454,13 +482,13 @@
     feather.replace();
     order_list_display(0)
     //open_modal('modal-welcome', '0')
-    </script>
     <?php
-        $message = isset($_GET['message']) ? $_GET['message'] : 0;
-        if($message=0){
-                print_r("<script>alert('open_modal('modal-welcome', '0')')</script>");
-            }
-        ?>
+        if($alert == 1){
+            echo"open_modal('modal-welcome', '0')";
+        }
+    ?>
+    </script>
+
     <script>
     var animation = bodymovin.loadAnimation({
         // animationData: { /* ... */ },
@@ -495,6 +523,16 @@
     function showContent() {
         document.getElementById('all-content').style.display = 'block';
         document.getElementById('top-content').style.display = 'block';
+    }
+
+    function changeAddressHref(id) {
+        linkAd = '../../database/choose_active_address.php?address=' + id;
+        window.location.href = linkAd;
+    }
+
+    function deleteAddressHref(id) {
+        linkAd = '../../database/functions/delete_address.php?address=' + id;
+        window.location.href = linkAd;
     }
     </script>
 </body>

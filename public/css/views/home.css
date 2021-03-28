@@ -186,6 +186,7 @@
 .box-list-disabled{
     filter: grayscale(100);
 }
+
 .disbaled-list-tag{
     position: absolute;
     right: 0px;
@@ -257,8 +258,23 @@
     border: 1.5px solid var(--gray-dark);
     padding: 20px;
     border-radius: 8px;
-    max-width: 320px;
     margin-top: 10px;
+    max-width: 320px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.innternal-block{
+    display: flex;
+    align-items: center;
+    min-width: 260px;
+    width: max-content;
+    max-width: 280px;
+    cursor: pointer;
 }
 
 .pin-list-ad{
@@ -271,11 +287,63 @@
 .adress-name{
     font-size: 22px;
     font-weight: 700;
+    margin-bottom: 6px;
 }
 
-.st-name, .ad-line1, .ad-line2{
-    font-size: 16px;
+.st-name, .ad-line1{
+    font-size: 15px;
+    line-height: 20px;
 }
+
+.ad-line2{
+    font-size: 12px;
+    line-height: 17px;
+}
+
+.edit-line-tag{
+    width: 100%;
+    min-width: 40px;
+    height: 100%;
+    text-align: right;
+}
+
+.i-exclude{
+    cursor: pointer;
+}
+
+.i-exclude:hover{
+    color: red;
+
+}
+
+@media (max-width: 520px){
+    .local-list{
+        display: flex;
+        align-items: center;
+        border: 1.5px solid var(--gray-dark);
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 10px;
+        max-width: 280px;
+    }
+
+    .innternal-block{
+        display: flex;
+        align-items: center;
+        width: max-content;
+        max-width: 245px;
+        cursor: pointer;
+    }
+
+    .edit-line-tag{
+        width: 100%;
+        min-width: 30px;
+        height: 100%;
+        text-align: right;
+    }
+    
+}
+
 
 /*Categorias*/
 

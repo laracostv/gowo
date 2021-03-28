@@ -140,10 +140,10 @@ function allCompleted() {
     var est = $("#state").val().length;
 
     if (tcep == 9 && end > 0 && nmr > 0 && bir > 0 && cit > 0 && est == 2) {
-        $("#addAddress").prop("disabled", false);
+        $("#addAddress").removeClass("disabled-fake");
         //console.log('libera');
     } else {
-        $("#addAddress").prop("disabled", true);
+        $("#addAddress").addClass("disabled-fake");
         //console.log('block');
     }
 }
@@ -154,9 +154,22 @@ function allCompletedSearch() {
     var s_end = $("#nbh_search").val().length;
 
     if (s_est == 2 && s_cit > 0 && s_end > 0) {
-        $("#btn-consult").prop("disabled", false);
+        $("#btn-consult").removeClass("disabled-fake");
     } else {
-        $("#btn-consult").prop("disabled", true);
+        $("#btn-consult").addClass("disabled-fake");
+    }
+}
+
+function calltoModal(modal_name, id) {
+    var s_est = $("#state_search").val().length;
+    var s_cit = $("#city_search").val().length;
+    var s_end = $("#nbh_search").val().length;
+    if (s_est == 2 && s_cit > 0 && s_end > 0) {
+        console.log();
+    } else {
+        document.getElementsByClassName('modal-area')[id].style.height = screen.height + 'px';
+        document.getElementById(modal_name).style.display = 'flex';
+        document.getElementsByClassName('modal-area')[id].style.display = 'block';
     }
 }
 

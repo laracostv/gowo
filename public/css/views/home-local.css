@@ -174,3 +174,28 @@
 .error-mensage-search{
   margin-top: 40px;
 }
+
+.fake-btn-default{
+  height: 50px;
+  border-radius: 8px;
+  margin-top: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-light);
+  background-color: var(--color-same);
+  border: 2px solid var(--color-same);
+  outline: 0px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disabled-fake{
+  background-color: var(--primary-color);
+  opacity: 0.4;
+  cursor: not-allowed;
+}

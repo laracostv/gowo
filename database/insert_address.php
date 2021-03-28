@@ -35,7 +35,7 @@
         $sql = "UPDATE users SET usrActiveAdress='$update_id_adress' WHERE idUser = '$id_usr'";
         mysqli_query($link,$sql);
 
-        header('Location: ../views/home/?message=1');
+        header('Location: ../views/home/?alert=2');
     }else{
         echo 'Código de erro:'.mysqli_errno( $link ).'<br>';
         echo 'Mensagem de erro:'.mysqli_error( $link ).'<br>';
