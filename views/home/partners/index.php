@@ -1,6 +1,10 @@
 <?php 
     session_start();
 
+    include_once('../../../database/list_worker_details.php');
+
+    $UserServiceJsonArr = json_decode($services_json, true);
+    
     $user = isset($_GET['user']) ? $_GET['user'] : 0;
 ?>
 <!DOCTYPE html>
@@ -21,6 +25,7 @@
     <link rel="stylesheet" href="../../../public/css/grid.css">
     <link rel="stylesheet" href="../../../public/css/default.css">
     <link rel="stylesheet" href="../../../public/css/views/home.css">
+    <link rel="stylesheet" href="../../../public/css/views/partners.css">
     <!--JS-->
     <script src="../../../public/js/theme.js"></script>
     <script src="../../../public/js/navigation.js"></script>
@@ -58,9 +63,21 @@
     <div class="container" style="padding: 0px;">
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-            <div class="xs-12 sm-12 md-12 lg-8 xg-8 cat-header">
-                <i class="fas-fa broom"></i>
-                <h2 class="cat-page">Texto</h2>
+            <div class="xs-12 sm-12 md-12 lg-8 xg-8 service-page-header">
+
+            </div>
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+        </div>
+    </div>
+    <div class="container" style="padding: 0px;">
+        <div class="row">
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+            <div class="xs-12 sm-12 md-12 lg-8 xg-8">
+                <center>
+                    <img class="img-worker"
+                        src="../../../assets/images/users/profile_photos/<?php echo$user_info_array[4]; ?>">
+                </center>
+                <h2 class="service-page-user"><?php echo$user_info_array['usrName']; ?></h2>
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
@@ -70,7 +87,59 @@
             <div class="xs-hide sm-hide md-hide lg-2 xg-2">
             </div>
             <div class="xs-12 sm-12 md-12 lg-8 xg-8">
+                <center>
+                    <div class="options-contact">
+                        <a href="mailto:<?php echo$user_info_array['usrEmail']; ?>">
+                            <div class="call-button">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </a>
+                        <a
+                            href="https://api.whatsapp.com/send?phone=55<?php echo$user_info_array['usrCellPhone']; ?>&text=Ol%C3%A1%20<?php echo$user_info_array['usrName']; ?>%2C%20encontrei%20seu%20perfil%20no%20Gowo!">
+                            <div class="chat-button">
+                                <i class="fab fa-whatsapp"></i>
+                                WhatsApp
+                            </div>
+                        </a>
+                        <a href="tel:+55<?php echo$user_info_array['usrCellPhone']; ?>">
+                            <div class="call-button">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                        </a>
+                    </div>
+                </center>
+                <?php foreach($UserServiceJsonArr['services'] as $arr){
+                //echo$arr['adName'];
+                $aspas = "'";
 
+                echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
+                            <a href="service?'.$arr['idService'].'">
+                                <div class="box-list">
+                                        <div class="first-box-space">
+                                            <div class="img-list-service"
+                                                style="
+                                                background-image: url('.$aspas.'../../../assets/images/users/services/'.$arr['sPhoto'].''.$aspas.');
+                                                background-size: cover;
+                                                background-attachment: scroll;">
+                                            </div>
+                                            <div class="info-list">
+                                                <p class="title-serv">'.$arr['sName'].'</p>
+                                                <p class="serv-list">'.$arr['sClass'].'</p>
+                                                <p class="serv-list-2">'.$arr['sNbh'].' - '.$arr['sCity'].'</p>
+                                                <p class="serv-val">R$ '.$arr['sVal'].'</p>
+                                            </div>
+                                        </div>
+                                    <div class="list-cat-star">
+                                        <div class="align-star">
+                                            <i data-feather="star" class="star-serv"></i>5.0
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    ';
+            }
+?>
             </div>
             <div class="xs-hide sm-hide md-2 lg-2 xg-2">
             </div>
