@@ -103,13 +103,13 @@
         </div>
 
         <div class="row">
-        <?php 
+            <?php 
         
             foreach($CategoryServicesJsonArr['services'] as $arr){
                 //echo$arr['adName'];
 
                 echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
-                            <a href="user/'.$arr['idUsr'].'">
+                            <a href="../partners/?user='.$arr['idUsr'].'">
                                 <div class="box-list">
                                     <img class="img-list-service" src="../../../assets/images/users/profile_photos/'.$arr['sProfilePhoto'].'">
                                         <div class="info-list">
@@ -129,7 +129,7 @@
                         <center><h2>'.$CategoryServicesJsonArr['message'].'</h2></center>
                     </div>';
             }
-            ?>            
+            ?>
         </div>
     </div>
 
@@ -188,7 +188,7 @@
         <i class="close-modal" data-feather="x" onclick="modalClose(this, 0)"></i>
         <div class="modal-title">Endereços</div>
         <div class="modal-body">
-        <?php 
+            <?php 
         foreach($adJsonArr['address_user'] as $arr){
             echo'<div class="local-list">
                     <div>
@@ -211,58 +211,58 @@
     </div>
     <!--FIM DO MODAL-->
     <script>
-        function order_list_display(id) {
-            if (id == 0) {
-                document.getElementById('list-mobile').style.display = "none";
-            }
-            if (id == 1) {
-                document.getElementById('list-mobile').style.display = "fixed";
-            }
+    function order_list_display(id) {
+        if (id == 0) {
+            document.getElementById('list-mobile').style.display = "none";
         }
-
-        const list = {
-            open: false,
-            bottomCartBar: document.getElementsByClassName('bottom-cart-bar')[0],
-            mobileDetails: document.getElementById('mobile-details-list'),
-            mobileDetailsFixed: document.getElementById('mobile-details-fixed'),
-            listMobile: document.getElementById('list-mobile'),
-            headerDetailsListMobile: document.getElementById('header-details-list-mobile')
+        if (id == 1) {
+            document.getElementById('list-mobile').style.display = "fixed";
         }
+    }
 
-        function open_list() {
-            if (list.open === false) {
-                const height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
-                list.bottomCartBar.style.height = `${height - 55}px`;
-                list.mobileDetails.style.display = 'block';
-                list.mobileDetailsFixed.style.display = 'none';
-                list.listMobile.style.background = 'var(--bg-default)';
-                list.open = true;
+    const list = {
+        open: false,
+        bottomCartBar: document.getElementsByClassName('bottom-cart-bar')[0],
+        mobileDetails: document.getElementById('mobile-details-list'),
+        mobileDetailsFixed: document.getElementById('mobile-details-fixed'),
+        listMobile: document.getElementById('list-mobile'),
+        headerDetailsListMobile: document.getElementById('header-details-list-mobile')
+    }
 
-            } else {
-                list.bottomCartBar.style.height = '40px';
-                list.mobileDetails.style.display = 'none';
-                list.mobileDetailsFixed.style.display = 'flex';
-                list.mobileDetailsFixed.style.justifyContent = 'space-between';
-                list.mobileDetailsFixed.style.backgroundColor = 'var(--bg-color)';
-                list.listMobile.style.background = 'var(--bg-color)';
-                list.open = false;
-            }
+    function open_list() {
+        if (list.open === false) {
+            const height = isNaN(window.innerHeight) ? window.clientHeight : window.innerHeight;
+            list.bottomCartBar.style.height = `${height - 55}px`;
+            list.mobileDetails.style.display = 'block';
+            list.mobileDetailsFixed.style.display = 'none';
+            list.listMobile.style.background = 'var(--bg-default)';
+            list.open = true;
+
+        } else {
+            list.bottomCartBar.style.height = '40px';
+            list.mobileDetails.style.display = 'none';
+            list.mobileDetailsFixed.style.display = 'flex';
+            list.mobileDetailsFixed.style.justifyContent = 'space-between';
+            list.mobileDetailsFixed.style.backgroundColor = 'var(--bg-color)';
+            list.listMobile.style.background = 'var(--bg-color)';
+            list.open = false;
         }
+    }
 
-        feather.replace();
-        order_list_display(0)
+    feather.replace();
+    order_list_display(0)
     </script>
     <script>
-        window.addEventListener("load", function (event) {
-            document.getElementById('lds-ellipsis').style.display = 'none';
-        });
-        /*
-        function showUI() {
-            document.getElementById('mob-nav').style.display = 'block';
-        }
-        function hideUI() {
-            document.getElementById('mob-nav').style.display = 'none';
-        }*/
+    window.addEventListener("load", function(event) {
+        document.getElementById('lds-ellipsis').style.display = 'none';
+    });
+    /*
+    function showUI() {
+        document.getElementById('mob-nav').style.display = 'block';
+    }
+    function hideUI() {
+        document.getElementById('mob-nav').style.display = 'none';
+    }*/
     </script>
 
 </body>

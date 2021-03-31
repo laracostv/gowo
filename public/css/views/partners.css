@@ -126,28 +126,26 @@
 }
 
 .list-cat-star{
-    position: right;
     padding-left: 3px;
     padding-right: 3px;
     font-size: 14px;
     font-weight: 600;
-    height: 100%;
     padding: 2px;
-    display: flex;
-    align-items: flex-start;
+    display: inline;
+    height: 100%;
 }
 
 /** SAFARI ONLY */
 @media not all and (min-resolution: .001dpcm) {
     @supports(-webkit-appearance:none) and (stroke-color:transparent) { 
         .list-cat-star{
-            position: absolute;
-            right: 10px;
             padding-left: 3px;
             padding-right: 3px;
             font-size: 14px;
-            margin-top: -15px;
             font-weight: 600;
+            padding: 2px;
+            display: inline;
+            height: 100%;
         }
     }
   }

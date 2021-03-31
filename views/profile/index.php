@@ -50,24 +50,24 @@
 
     <div class="container" style="padding: 0px">
         <div class="row">
-        <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-        <div class="xs-12 sm-12 md-12 lg-8 xg-8">
-            <div class="header-profile">
-            <img class="header-img-profile" src="../../assets/brand/logo-gowo-white-h120.png">
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+            <div class="xs-12 sm-12 md-12 lg-8 xg-8">
+                <div class="header-profile">
+                    <img class="header-img-profile" src="../../assets/brand/logo-gowo-white-h120.png">
 
-            </div>
-            <center>
-                <img src="<?php
+                </div>
+                <center>
+                    <img src="<?php
                     if(isset($_SESSION['profile_photo'])){
                         echo$_SESSION['profile_photo'];
                     }else{
                         echo"../../assets/images/users/profile_photos/user.png";
                     }
                 ?>" class="profile_photo"></img>
-                <p class="usr_profile_name"><?php echo$_SESSION['name']; ?></p>
-            </center>
-        </div>
-        <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+                    <p class="usr_profile_name"><?php echo$_SESSION['name']; ?></p>
+                </center>
+            </div>
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
     </div>
     <div style="height:60px"></div>
@@ -76,31 +76,31 @@
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
 
             <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'favorites'">
-                    <div class="box-option-profile">
-                        <i class="box-option-profile-icon" data-feather="heart"></i>
-                        <p>Favoritos</p>
-                    </div>
+                <div class="box-option-profile">
+                    <i class="box-option-profile-icon" data-feather="heart"></i>
+                    <p>Favoritos</p>
+                </div>
             </div>
 
             <div class="xs-12 sm-12 md-6 lg-2 xg-2">
-                    <div class="box-option-profile">
-                        <i class="box-option-profile-icon" data-feather="book"></i>
-                        <p>Histórico de serviços</p>
-                    </div>
+                <div class="box-option-profile">
+                    <i class="box-option-profile-icon" data-feather="book"></i>
+                    <p>Histórico de serviços</p>
+                </div>
             </div>
 
             <div class="xs-12 sm-12 md-6 lg-2 xg-2">
-                    <div class="box-option-profile">
-                        <i class="box-option-profile-icon" data-feather="user-check"></i>
-                        <p>Meus serviços</p>
-                    </div>
+                <div class="box-option-profile">
+                    <i class="box-option-profile-icon" data-feather="user-check"></i>
+                    <p>Meus serviços</p>
+                </div>
             </div>
 
             <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'settings'">
-                    <div class="box-option-profile">
-                        <i class="box-option-profile-icon" data-feather="settings"></i>
-                        <p>Configurações</p>
-                    </div>
+                <div class="box-option-profile">
+                    <i class="box-option-profile-icon" data-feather="settings"></i>
+                    <p>Configurações</p>
+                </div>
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
@@ -108,16 +108,16 @@
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
 
             <div class="xs-12 sm-12 md-6 lg-2 xg-2">
-            <div class="box-option-profile">
-                <i class="box-option-profile-icon" data-feather="help-circle"></i>
-                <p>Ajuda</p>
-            </div>
+                <div class="box-option-profile">
+                    <i class="box-option-profile-icon" data-feather="help-circle"></i>
+                    <p>Ajuda</p>
+                </div>
 
-            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-        </div>
+                <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+            </div>
         </div>
         <div style="height: 40px"></div>
-        <center>Gowo &middot v0.5</center>
+        <center>Gowo &middot v0.6.1</center>
         <div style="height: 80px"></div>
     </div>
 
@@ -211,7 +211,7 @@
     <!--FIM DO MODAL-->
 
     <script>
-        feather.replace();
+    feather.replace();
     </script>
 </body>
 

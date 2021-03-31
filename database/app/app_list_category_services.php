@@ -43,10 +43,12 @@ if (mysqli_num_rows($result) > 0) {
             $userWasListed[] = $row["idUserDo"];
             $services["idUsr"] = $row["idUserDo"];
             
-            $result_user = mysqli_query($link, "SELECT usrName, usrProfilePhoto FROM users WHERE idUser = $servicesIdUserDo");
+            $result_user = mysqli_query($link, "SELECT usrName, usrEmail, usrCellPhone, usrProfilePhoto FROM users WHERE idUser = $servicesIdUserDo");
             $userDoArray = mysqli_fetch_array($result_user);
             $services["userDoName"] = $userDoArray['usrName'];
             $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhoto'];
+            $services["userDoPhone"] = $userDoArray['usrCellPhone'];
+            $services["userDoMail"] = $userDoArray['usrEmail'];
             
             //echo$services["userDoName"];
             //echo json_encode(mysqli_fetch_array($result_user));

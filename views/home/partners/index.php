@@ -111,7 +111,11 @@
                 <?php foreach($UserServiceJsonArr['services'] as $arr){
                 //echo$arr['adName'];
                 $aspas = "'";
+                $value_print = '';
 
+                if (isset($arr['sVal'])){
+                    $value_print = $arr['sVal'];
+                }
                 echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
                             <a href="service?'.$arr['idService'].'">
                                 <div class="box-list">
@@ -126,7 +130,7 @@
                                                 <p class="title-serv">'.$arr['sName'].'</p>
                                                 <p class="serv-list">'.$arr['sClass'].'</p>
                                                 <p class="serv-list-2">'.$arr['sNbh'].' - '.$arr['sCity'].'</p>
-                                                <p class="serv-val">R$ '.$arr['sVal'].'</p>
+                                                <p class="serv-val">'.$value_print.'</p>
                                             </div>
                                         </div>
                                     <div class="list-cat-star">
