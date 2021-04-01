@@ -46,6 +46,7 @@ if (mysqli_num_rows($result) > 0) {
             $result_user = mysqli_query($link, "SELECT usrName, usrEmail, usrCellPhone, usrProfilePhoto FROM users WHERE idUser = $servicesIdUserDo");
             $userDoArray = mysqli_fetch_array($result_user);
             $services["userDoName"] = $userDoArray['usrName'];
+            $services["userDoLastName"] = $userDoArray['usrLastName'];
             $services["userDoProfilePhoto"] = $userDoArray['usrProfilePhoto'];
             $services["userDoPhone"] = $userDoArray['usrCellPhone'];
             $services["userDoMail"] = $userDoArray['usrEmail'];
