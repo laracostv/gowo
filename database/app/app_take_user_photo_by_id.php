@@ -20,5 +20,5 @@
     }
 
     mysqli_close($link);
-    echo json_encode($responseImg['img']);
+    echo json_encode($responseImg);
 ?>
