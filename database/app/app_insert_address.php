@@ -32,7 +32,6 @@
             var_dump($sql);
             $result_id = mysqli_query($link, $sql);
             $user_data = mysqli_fetch_array($result_id);
-            $_SESSION['active_adress'] = $user_data['MAX(idAdress)'];
             $update_id_adress = $user_data['MAX(idAdress)'];
 
             $sql = "UPDATE users SET usrActiveAdress='$update_id_adress' WHERE idUser = '$id_usr'";
