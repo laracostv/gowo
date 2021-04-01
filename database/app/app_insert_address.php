@@ -29,7 +29,7 @@
         
         if(mysqli_query($link, $sql)){
             $sql = "SELECT MAX(idAdress) FROM address WHERE idUserAd = '$id_usr'";
-            var_dump($sql);
+            //var_dump($sql);
             $result_id = mysqli_query($link, $sql);
             $user_data = mysqli_fetch_array($result_id);
             $update_id_adress = $user_data['MAX(idAdress)'];
