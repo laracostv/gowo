@@ -55,7 +55,7 @@ if (isset($_POST['nameNewUser']) && isset($_POST['newEmail']) && isset($_POST['p
 
 		//Pasta onde o arquivo vai ser salvo
 		//UPLOAD IMAGE
-		$_UP['pasta'] = '../assets/images/users/profile_photos/';
+		$_UP['pasta'] = '../../assets/images/users/profile_photos/';
     
 		//Tamanho máximo do arquivo em Bytes
 		$_UP['tamanho'] = 1024*1024*100; //5mb
