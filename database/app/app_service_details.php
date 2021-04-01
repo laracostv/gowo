@@ -8,6 +8,8 @@
 $link = '';
 // array que guarda a resposta da requisicao
 $response = array();
+$posi = 0;
+$finded = false;
 
 //$teste_category = 1;
 
@@ -24,6 +26,9 @@ if (isset($_GET["idService"])) {
  
     // Obtem do BD os detalhes do produto com pid especificado na requisicao GET
     $sql = "SELECT * FROM services WHERE idService = '$idService'";
+
+    $result_address = mysqli_query($link, "SELECT idAdress, adNbh, adCity, adState FROM address");
+    $addressArray = $result_address->fetch_all();
 
 	$query = mysqli_query($link, $sql);
 
@@ -44,6 +49,20 @@ if (isset($_GET["idService"])) {
             $service["sPhoto"] = $query["sPhoto"];
             $service["sClass"] = $query["sClass"];
             
+            $servicesAddressId = $service["sAdressId"];
+
+            //produra o endereço do servico
+            while($finded == false){
+                if($addressArray[$posi][0] == $servicesAddressId){
+                    //print_r($addressArray[$posi]);
+                    $service['sNbh'] = $addressArray[$posi][1];
+                    $service['sCity'] = $addressArray[$posi][2];
+                    $service['sState'] = $addressArray[$posi][3];
+                    $finded = true;
+                }                    
+                //echo $adLineInfo;
+                $posi++;
+            }
             
             // Caso o produto exista no BD, o cliente 
 			// recebe a chave "success" com valor 1.
