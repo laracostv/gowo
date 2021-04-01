@@ -17,7 +17,7 @@
     $arquivo = $_FILES['arquivo']['name'];
 			
     //Pasta onde o arquivo vai ser salvo
-    $_UP['pasta'] = '../assets/images/users/profile_photos/';
+    $_UP['pasta'] = '../assets/images/users/services/';
     
     //Tamanho máximo do arquivo em Bytes
     $_UP['tamanho'] = 1024*1024*100; //5mb
@@ -93,4 +93,4 @@
         header('Location: ../index.php?success=1');
         mysqli_query($link, $sql);
         mysqli_close($link);
-?>  
+?>

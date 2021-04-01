@@ -14,6 +14,7 @@ $link = $objDb->mysql_connect();
 $response = array();
 $newLastName = '';
 
+
 // check for required fields
 if (isset($_POST['nameNewUser']) && isset($_POST['newEmail']) && isset($_POST['pwd']) && isset($_POST['dateBorn']) && isset($_POST['cell']) && isset($_FILES['img'])) {
  
@@ -50,10 +51,27 @@ if (isset($_POST['nameNewUser']) && isset($_POST['newEmail']) && isset($_POST['p
         // imagem o mimetype do arquivo original. O mimetype e um codigo que indica o 
         // tipo de arquivo e sua extensao.
         $img = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+
+		//converte a imagem em jpg, faz o upload e gera o nome a ser salvo em jpg		
+		$folderPath = "../../assets/images/users/profile_photos/";
+
+        $image_parts = explode(";base64,", $img);
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+
+        $image_type = $image_type_aux[1];
+
+        $image_base64_decoded = base64_decode($image_parts[1]);
+
+        $file = $folderPath . uniqid() . '.jpg';
+
+        $fileName = explode("../../assets/images/users/profile_photos/", $file);
+
+        file_put_contents($file, $image_base64_decoded);
         
 		// mysql inserting a new row
-		$result = mysqli_query($link, "INSERT INTO users (usrName, usrLastName, usrEmail, usrPwd, usrCellPhone, usrDateN, usrProfilePhoto)
-		VALUES('$newName', '$newLastName', '$newEmail', '$newPwd', '$newCell', '$newDateBorn', '$img')");
+		$result = mysqli_query($link, "INSERT INTO users (usrName, usrLastName, usrEmail, usrPwd, usrCellPhone, usrDateN, usrProfilePhoto, usrProfilePhotoSrc)
+		VALUES('$newName', '$newLastName', '$newEmail', '$newPwd', '$newCell', '$newDateBorn', '$img', '$fileName[1]')");
 	 
 		if ($result) {
 			$response["success"] = 1;
