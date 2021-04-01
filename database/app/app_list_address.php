@@ -5,6 +5,8 @@
     require_once('../db.class.php');
     $addres_qnt = 0;
     $address_array = array();
+    $id_usr_session = 0;
+    $id_usr_session = $_GET['id_usr'];
     //Conecta a tabela de servicos
     $sql = "SELECT * FROM address";
 
@@ -12,7 +14,6 @@
     $link = $objDb->mysql_connect();
 
     $adrInfo = mysqli_query($link, $sql);
-    $id_usr_session = $_POST['id_usr'];
 
 
     if(isset($id_usr_session)){
