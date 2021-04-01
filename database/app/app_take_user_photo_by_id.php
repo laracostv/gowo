@@ -2,6 +2,7 @@
     $link = '';
     // array que guarda a resposta da requisicao
     $responseImg = array();
+    $responseImgArr = array();
     
     require_once('../db.class.php');
     $objDb = new db();
@@ -13,10 +14,12 @@
         $search_image = mysqli_query($link, "SELECT usrProfilePhoto FROM users WHERE idUser = '$idUserSet'");
         $responseImg["img"] = mysqli_fetch_array($search_image);
         $responseImg["success"] = 1;
+
+        array_push($responseImgArr["userPhoto"], $responseImg);
     }else{
-        $responseImg["success"] = 0;
+        $responseImgArr["success"] = 0;
     }
 
     mysqli_close($link);
-    echo json_encode($responseImg);
+    echo json_encode($responseImgArr);
 ?>
