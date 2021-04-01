@@ -13,6 +13,24 @@
 
     $objDb = new db();
     $link = $objDb->mysql_connect();
+
+        // Para a imagem do produto, primeiramente se determina qual o tipo de imagem.
+        // Isso e feito atraves da obtencao da extensao do arquivo, localizada na parte
+        // final do nome do arquivo (ex. ".jpg")
+        $imageFileType = strtolower(pathinfo(basename($_FILES["arquivo"]["name"]),PATHINFO_EXTENSION));
+        
+        // A imagem e convertida de binario para string atraves do metodo de codificacao
+        // base64
+        $image_base64 = base64_encode(file_get_contents($_FILES['arquivo']['tmp_name']) );
+        
+        // No futuro, clientes que pedirem pela imagem armazenada no BD devem ser 
+        // capazes de converter a string base64 para o formato original binario.
+        // Para que isso possa ser feito, contatena-se no inicio da string base64 da 
+        // imagem o mimetype do arquivo original. O mimetype e um codigo que indica o 
+        // tipo de arquivo e sua extensao.
+        $imgBase64Final = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+
+        
             
     $arquivo = $_FILES['arquivo']['name'];
 			
@@ -87,8 +105,8 @@
         }
     }
 
-        $sql = "insert into services(idUserDo, sName, sDesc, sVal, sAdressId, sClass, sPhotoSrc)
-         values ('$service_userId', '$service_name', '$desc', '$value', '$adr', '$category', '$nome_final')";
+        $sql = "insert into services(idUserDo, sName, sDesc, sVal, sAdressId, sClass,sPhoto, sPhotoSrc)
+         values ('$service_userId', '$service_name', '$desc', '$value', '$adr', '$category', '$imgBase64Final', '$nome_final')";
 
         header('Location: ../index.php?success=1');
         mysqli_query($link, $sql);
