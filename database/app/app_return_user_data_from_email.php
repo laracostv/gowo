@@ -14,7 +14,7 @@
     if(isset($idUserSet)){*/
         $array_result = array();
         
-        $search_image = mysqli_query($link, "SELECT idUser, usrName, usrLastName, usrEmail, usrDateN, usrCellPhone FROM users WHERE usrEmail = '$keyUserSet'");
+        $search_image = mysqli_query($link, "SELECT idUser, usrName, usrLastName, usrEmail, usrDateN, usrCellPhone, usrProfilePhoto FROM users WHERE usrEmail = '$keyUserSet'");
         $array_result = $search_image->fetch_all();
 
         $responseUserData["idUser"] = $array_result[0][0];
@@ -23,6 +23,7 @@
         $responseUserData["usrEmail"] = $array_result[0][3];
         $responseUserData["usrDateN"] = $array_result[0][4];
         $responseUserData["usrCellPhone"] = $array_result[0][5];
+        $responseUserData["usrProfilePhoto"] = $array_result[0][6];
 
         $responseUserData["success"] = 1;
     }else{
