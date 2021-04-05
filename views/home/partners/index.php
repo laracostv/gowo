@@ -117,7 +117,7 @@
                     $value_print = $arr['sVal'];
                 }
                 echo'   <div class="xs-12 sm-12 md-12 lg-6 xg-6 no-decoration">
-                            <a href="service?'.$arr['idService'].'">
+                            <a href="service?service='.$arr['idService'].'">
                                 <div class="box-list">
                                         <div class="first-box-space">
                                             <div class="img-list-service"

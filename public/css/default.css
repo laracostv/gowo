@@ -575,6 +575,11 @@ input[type=checkbox]:checked:after {
     border: 2px solid var(--color-same);
     outline: 0px;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-default:hover{
+    opacity: 0.8;
 }
 
 .btn-default-outline{

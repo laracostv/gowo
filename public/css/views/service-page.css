@@ -1,0 +1,209 @@
+.service-page-photo{
+    height: 400px;
+    max-width: 600px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.service-user-do-box{
+    border-radius: 12px;
+    border: 1px solid var(--gray-dark);
+    padding: 10px;
+    margin-top: 40px;
+    position: sticky;
+    top: 40px;
+}
+
+.worker-name{
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.worker-img{
+    height: 60px;
+    width: 60px;
+    border-radius: 80px;
+}
+
+.top-header{
+    display: flex;
+    align-items: center;
+}
+
+.worker-info{
+    margin-left: 10px;
+
+}
+
+.aval-star{
+    color: var(--color-same);
+    margin-top: 5px;
+}
+
+.avv-worker{
+    height: 14px;
+    width: 14px;
+}
+
+.contact-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 55px;
+    width: 55px;
+    border-radius: 50px;
+    background-color: var(--color-same);
+    color: #ffffff;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.options-contact{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.service-page-name{
+    text-align: center;
+    font-weight: 700;
+    line-height: 36px;
+    margin-top: 30px;
+    font-size: 32px;
+}
+
+.photo-float{
+    height: 60px;
+    width: 60px;
+    border-radius: 50px;
+}
+
+.float-name{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.service-price{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-same);
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.service-desc{
+    font-size: 18px;
+    line-height: 26px;
+}
+
+.service-desc p{
+    font-size: 18px !important;
+    line-height: 26px !important;
+    margin-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn-default-bottom{
+    height: 50px;
+    border-radius: 8px;
+    background-color: var(--color-same);
+    margin-top: 2px;
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 700;
+    outline: 0;
+    width: 80%;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.btn-default-bottom-2{
+    height: 50px;
+    border-radius: 8px;
+    background-color: #910000;
+    margin-top: 2px;
+    color: var(--text-light);
+    font-size: 18px;
+    font-weight: 700;
+    outline: 0;
+    width: 20%;
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.bottom-take-bar, .top-take-bar{
+    display: none;
+}
+
+@media (max-width: 991px){
+    .service-page-photo{
+        margin-top: 55px;
+    }
+    .bottom-spacer{
+        height: 100px;
+    }
+
+    .bottom-take-bar{
+        position: fixed;
+        bottom: 0px;
+        height: 60px;
+        display: flex;
+        background-color: var(--bg-light);
+        border-top: 1px solid var(--gray-dark);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .top-take-bar{
+        position: fixed;
+        top: 0px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        background-color: var(--bg-light);
+        border-top: 1px solid var(--gray-dark);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        width: 100%;
+    }
+
+    .return-arrow{
+        height: 35px;
+        width: 35px;
+        color: var(--color-same);
+        margin-left: 5px;
+    }
+
+    .name-user-top:disabled{
+        font-size: 17px;
+        font-weight: 600;
+        background-color: var(--bg-light);
+        margin-left: 15px;
+        min-width: 80%;
+    }
+
+    .adr-user-top:disabled{
+        font-size: 14px;
+        font-weight: 400;
+        background-color: var(--bg-light);
+        margin-left: 15px;
+        min-width: 80%;
+    }
+
+    .fav-icon-top{
+        height: 24px;
+        width: 24px;
+        right: 15px;
+        position: fixed;
+    }
+}
