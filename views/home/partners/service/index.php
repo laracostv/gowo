@@ -60,9 +60,7 @@
     </div>
     <!--TAKE BAR-->
     <div class="container-fluid top-take-bar">
-        <a href="../?user=<?php echo $response['service'][0]['idUserDo']?>">
-            <i data-feather="chevron-left" class="return-arrow"></i>
-        </a>
+        <i onclick="window.history.back()" data-feather="chevron-left" class="return-arrow"></i>
         <div class="info-line-top">
             <input class="name-user-top" placeholder="<?php echo$response['service'][0]['usrName'] ?>" disabled="true">
             <input class="adr-user-top"
@@ -207,25 +205,25 @@
                         echo"<a href='../../'>Entrar</a> ou <a href='../../views/initial/signup'>Cadastrar</a>";
                     }
                 ?></div>
-        <div class="nav-item-square active-v-nav" onclick="navRedSecond(1)">
+        <div class="nav-item-square active-v-nav" onclick="navRedThird(1)">
             <div>
                 <i data-feather="home" class="v-nav-icon"></i>
                 <div class="v-nav-item-name">Início</div>
             </div>
         </div>
-        <div class="nav-item-square" onclick="navRedSecond(2)">
+        <div class="nav-item-square" onclick="navRedThird(2)">
             <div>
                 <i data-feather="message-square" class="v-nav-icon"></i>
                 <div class="v-nav-item-name">Chat</div>
             </div>
         </div>
-        <div class="nav-item-square" onclick="navRedSecond(3)">
+        <div class="nav-item-square" onclick="navRedThird(3)">
             <div>
                 <center><i data-feather="bell" class="v-nav-icon"></i></center>
                 <div class="v-nav-item-name">Recentes</div>
             </div>
         </div>
-        <div class="nav-item-square" onclick="navRedSecond(4)">
+        <div class="nav-item-square" onclick="navRedThird(4)">
             <div>
                 <i data-feather="user" class="v-nav-icon"></i>
                 <div class="v-nav-item-name">Perfil</div>

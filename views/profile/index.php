@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="xs-12 sm-12 md-6 lg-2 xg-2">
+            <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'myservices'">
                 <div class="box-option-profile">
                     <i class="box-option-profile-icon" data-feather="user-check"></i>
                     <p>Meus serviços</p>
@@ -117,7 +117,7 @@
             </div>
         </div>
         <div style="height: 40px"></div>
-        <center>Gowo &middot v0.6.1</center>
+        <center>Gowo &middot v0.8</center>
         <div style="height: 80px"></div>
     </div>
 

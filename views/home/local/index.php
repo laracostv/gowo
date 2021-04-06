@@ -65,7 +65,7 @@
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
             <div class="xs-12 sm-12 md-12 lg-8 xg-8 area-header">
                 <i data-feather="map-pin" class="feather-icon-header"></i>
-                <h2 class="header-area-text">Adionar local</h2>
+                <h2 class="header-area-text">Adicionar local</h2>
             </div>
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
@@ -265,8 +265,8 @@
         </div>
         <div class="nav-item-square" onclick="navRedSecond(2)">
             <div>
-                <i data-feather="message-square" class="v-nav-icon"></i>
-                <div class="v-nav-item-name">Chat</div>
+                <i data-feather="search" class="v-nav-icon"></i>
+                <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
         <div class="nav-item-square" onclick="navRedSecond(3)">
