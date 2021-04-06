@@ -12,7 +12,7 @@
 
 
             //hostgator
-            $host = getenv('g_host_var');
+            $host = 'br252.hostgator.com.br';
             $usuario = getenv('g_user_var');
             $senha = getenv('g_pwd_var');
             $database = getenv('g_database_var');
