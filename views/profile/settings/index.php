@@ -49,21 +49,21 @@
 
     <div class="container" style="padding: 0px">
         <div class="row">
-        <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-        <div class="xs-12 sm-12 md-12 lg-8 xg-8">
-            <div class="header-profile">
-                <i class="header-icon-profile" data-feather="settings"></i>
-                <h2 class="text-cat-profile">Configurações</h2>
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+            <div class="xs-12 sm-12 md-12 lg-8 xg-8">
+                <div class="header-profile">
+                    <i class="header-icon-profile" data-feather="settings"></i>
+                    <h2 class="text-cat-profile">Configurações</h2>
+                </div>
             </div>
-        </div>
-        <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
+            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
             <div class="xs-12 sm-12 md-12 lg-8 xg-8">
-            <div class="config-option">
+                <div class="config-option">
                     <div class="title-config">
                         Editar perfil
                     </div>
@@ -97,7 +97,8 @@
                 </div>
 
                 <center>
-                    <div class="exit-btn" onclick="window.location.href = '../../../database/exit_session.php'">Encerrar sessão</div>
+                    <div class="exit-btn" onclick="window.location.href = '../../../database/exit_session.php'">Encerrar
+                        sessão</div>
                 </center>
             </div>
             <div class="xs-hide sm-hide md-hide lg-1 xg-1"></div>
@@ -129,8 +130,8 @@
         </div>
         <div class="nav-item-square" onclick="navRedSecond(2)">
             <div>
-                <i data-feather="message-square" class="v-nav-icon"></i>
-                <div class="v-nav-item-name">Chat</div>
+                <i data-feather="search" class="v-nav-icon"></i>
+                <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
         <div class="nav-item-square" onclick="navRedSecond(3)">
@@ -162,15 +163,15 @@
     <!--FIM DO MODAL-->
 
     <script>
-        function change_theme(){
-            if(document.getElementById("theme_chose").checked){
-                darkTheme()
-                window.location.href = "../../../options.php?theme=1";
-            }else{
-                window.location.href = "../../../options.php?theme=2";
-            }
+    function change_theme() {
+        if (document.getElementById("theme_chose").checked) {
+            darkTheme()
+            window.location.href = "../../../options.php?theme=1";
+        } else {
+            window.location.href = "../../../options.php?theme=2";
         }
-        feather.replace();
+    }
+    feather.replace();
     </script>
     <?php
     if (isset($_COOKIE["theme"])){
@@ -181,7 +182,7 @@
         }
     }
     ?>
-    
+
 </body>
 
 </html>

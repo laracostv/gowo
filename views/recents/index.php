@@ -1,14 +1,11 @@
 <?php 
     session_start();
-    if(!isset($_SESSION['email'])){
-            header('Location: ../../index.php?erro=2');
-    }
-?>
+    ?>
 <!DOCTYPE html>
 <html lang="pt_br">
 
 <head>
-    <title>GoWo</title>
+    <title>Recentes</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/icons/apple-touch-icon.png">
@@ -21,7 +18,6 @@
     <link rel="stylesheet" href="../../public/css/css_reset.css">
     <link rel="stylesheet" href="../../public/css/grid.css">
     <link rel="stylesheet" href="../../public/css/default.css">
-    <link rel="stylesheet" href="../../public/css/views/profile.css">
     <!--JS-->
     <script src="../../public/js/theme.js"></script>
     <script src="../../public/js/navigation.js"></script>
@@ -38,87 +34,18 @@
 
 <body>
     <?php
-        if (isset($_COOKIE["theme"])){
-            $themeCookie = $_COOKIE['theme'];
-            
-            if($themeCookie == 'dark'){
-                echo '<script>darkTheme();</script>';
-            }
+    if (isset($_COOKIE["theme"])){
+        $themeCookie = $_COOKIE['theme'];
+        
+        if($themeCookie == 'dark'){
+            echo '<script>darkTheme();</script>';
         }
-    ?>
+    }
+?>
 
-
-    <div class="container" style="padding: 0px">
-        <div class="row">
-            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-            <div class="xs-12 sm-12 md-12 lg-8 xg-8">
-                <div class="header-profile">
-                    <img class="header-img-profile" src="../../assets/brand/logo-gowo-white-h120.png">
-
-                </div>
-                <center>
-                    <img src="<?php
-                    if(isset($_SESSION['profile_photo'])){
-                        echo$_SESSION['profile_photo'];
-                    }else{
-                        echo"../../assets/images/users/profile_photos/user.png";
-                    }
-                ?>" class="profile_photo"></img>
-                    <p class="usr_profile_name"><?php echo$_SESSION['name']; ?></p>
-                </center>
-            </div>
-            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-        </div>
-    </div>
-    <div style="height:60px"></div>
     <div class="container">
         <div class="row">
-            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-
-            <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'favorites'">
-                <div class="box-option-profile">
-                    <i class="box-option-profile-icon" data-feather="heart"></i>
-                    <p>Favoritos</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-6 lg-2 xg-2">
-                <div class="box-option-profile">
-                    <i class="box-option-profile-icon" data-feather="book"></i>
-                    <p>Histórico de serviços</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'myservices'">
-                <div class="box-option-profile">
-                    <i class="box-option-profile-icon" data-feather="user-check"></i>
-                    <p>Meus serviços</p>
-                </div>
-            </div>
-
-            <div class="xs-12 sm-12 md-6 lg-2 xg-2" onclick="window.location.href = 'settings'">
-                <div class="box-option-profile">
-                    <i class="box-option-profile-icon" data-feather="settings"></i>
-                    <p>Configurações</p>
-                </div>
-            </div>
-            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
         </div>
-        <div class="row">
-            <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-
-            <div class="xs-12 sm-12 md-6 lg-2 xg-2">
-                <div class="box-option-profile">
-                    <i class="box-option-profile-icon" data-feather="help-circle"></i>
-                    <p>Ajuda</p>
-                </div>
-
-                <div class="xs-hide sm-hide md-hide lg-2 xg-2"></div>
-            </div>
-        </div>
-        <div style="height: 40px"></div>
-        <center>Gowo &middot v1.0.1</center>
-        <div style="height: 80px"></div>
     </div>
 
     <!--NAV DESKTOP-->
@@ -149,13 +76,13 @@
                 <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
-        <div class="nav-item-square" onclick="navRed(3)">
+        <div class="nav-item-square active-v-nav" onclick="navRed(3)">
             <div>
                 <center><i data-feather="bell" class="v-nav-icon"></i></center>
                 <div class="v-nav-item-name">Recentes</div>
             </div>
         </div>
-        <div class="nav-item-square active-v-nav" onclick="navRed(4)">
+        <div class="nav-item-square" onclick="navRed(4)">
             <div>
                 <i data-feather="user" class="v-nav-icon"></i>
                 <div class="v-nav-item-name">Perfil</div>
@@ -163,7 +90,6 @@
         </div>
         <img class="v-nav-brand" src="../../assets/brand/logo-gowo-white-h120.png">
     </div>
-
 
     <!--MOBILE BAR NAVIGATION-->
 
@@ -177,21 +103,21 @@
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(20)">
                 <div>
-                    <center><i data-feather="search" class="nav-icon"></i></center>
-                    <div class="text-nav">Buscar</div>
+                    <center><i data-feather="message-square" class="nav-icon"></i></center>
+                    <div class="text-nav">Chat</div>
                     <!--<div class="chat-notification">10</div>-->
                 </div>
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(3)">
                 <div>
-                    <center><i data-feather="bell" class="nav-icon"></i></center>
-                    <div class="text-nav">Recentes</div>
+                    <center><i data-feather="bell" class="nav-icon active-mob"></i></center>
+                    <div class="text-nav active-mob">Recentes</div>
                 </div>
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(4)">
                 <div>
-                    <center><i data-feather="user" class="nav-icon active-mob"></i></center>
-                    <div class="text-nav active-mob">Perfil</div>
+                    <center><i data-feather="user" class="nav-icon"></i></center>
+                    <div class="text-nav">Perfil</div>
                 </div>
             </div>
         </div>
@@ -206,13 +132,15 @@
         <p class="modal-text">Seja bem-vindo(a) a plataforma que vai revolucionar as interações de trabalho.</p>
         <div class="modal-footer">
             <button class="modal-btn">Vamos lá</button>
-        </div>
-    </div>
-    <!--FIM DO MODAL-->
+            <div>
+                </img>
+                <!--FIM DO MODAL-->
 
-    <script>
-    feather.replace();
-    </script>
+                <script>
+                feather.replace();
+                //open_modal('modal-welcome');
+                </script>
+                <script src="../../../public/js/theme.js"></script>
 </body>
 
 </html>

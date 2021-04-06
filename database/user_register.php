@@ -56,7 +56,7 @@
                 $_SESSION['id_usr'] = $user_data['idUser'];
                 $_SESSION['active_adress'] = $user_data['usrActiveAdress'];
                 
-                header('Location: ../views/home/?alert=1');
+                header('Location: ../views/initial/signup/profile_photo/');
             }else{
                 header('Location: ../index.php?erro=1');
             }

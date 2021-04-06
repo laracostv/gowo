@@ -307,11 +307,14 @@
         </div>
         <img class="v-nav-brand" src="../../assets/brand/logo-gowo-white-h120.png">
     </div>
+
+    <!--
     <div class="nav-cart-circle">
         <i data-feather="briefcase" class="nav-cart-circle-icon"></i>
     </div>
+    -->
 
-    <!--ORDER LIST MOBILE-->
+    <!--ORDER LIST MOBILE
     <div class="bottom-spacer"></div>
     <div id="list-mobile" class="container-fluid bottom-cart-bar xg-hide lg-hide md-show">
         <div class="row" id="mobile-details-fixed" onclick="open_list(1)">
@@ -346,7 +349,7 @@
             </div>
         </div>
     </div>
-
+-->
     <!--MOBILE BAR NAVIGATION-->
 
     <div class="container-fluid bottom-nav-bar xg-hide lg-hide md-show" id="mob-nav">

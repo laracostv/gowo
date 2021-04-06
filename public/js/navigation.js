@@ -3,10 +3,10 @@ function navRed(id) {
         window.location.href = "../home";
     }
     if (id == 2) {
-        window.location.href = "../chat";
+        window.location.href = "../search";
     }
     if (id == 20) {
-        window.location.href = "../mobile/chat";
+        window.location.href = "../search";
     }
     if (id == 3) {
         window.location.href = "../recents";
@@ -23,10 +23,10 @@ function navRedSecond(id) {
         window.location.href = "../../home";
     }
     if (id == 2) {
-        window.location.href = "../../chat";
+        window.location.href = "../../search";
     }
     if (id == 20) {
-        window.location.href = "../../mobile/chat";
+        window.location.href = "../../search";
     }
     if (id == 3) {
         window.location.href = "../../recents";
@@ -41,10 +41,10 @@ function navRedThird(id) {
         window.location.href = "../../../home";
     }
     if (id == 2) {
-        window.location.href = "../../../chat";
+        window.location.href = "../../../search";
     }
     if (id == 20) {
-        window.location.href = "../../mobile/chat";
+        window.location.href = "../../search";
     }
     if (id == 3) {
         window.location.href = "../../../recents";

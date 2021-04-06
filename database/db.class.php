@@ -1,4 +1,5 @@
 <?php
+
     class db {
         
         public function mysql_connect(){
@@ -33,4 +34,5 @@
             return $con;
         }
     }
+    
 ?>

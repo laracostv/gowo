@@ -144,8 +144,8 @@
         </div>
         <div class="nav-item-square" onclick="navRedSecond(2)">
             <div>
-                <i data-feather="message-square" class="v-nav-icon"></i>
-                <div class="v-nav-item-name">Chat</div>
+                <i data-feather="search" class="v-nav-icon"></i>
+                <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
         <div class="nav-item-square" onclick="navRedSecond(3)">

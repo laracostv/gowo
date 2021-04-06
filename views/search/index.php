@@ -1,8 +1,13 @@
+<?php 
+    session_start();
+    //include_once('../../database/functions/search.php');
+    
+    ?>
 <!DOCTYPE html>
 <html lang="pt_br">
 
 <head>
-    <title>GoWo</title>
+    <title>Buscar</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/icons/apple-touch-icon.png">
@@ -16,6 +21,7 @@
     <link rel="stylesheet" href="../../public/css/grid.css">
     <link rel="stylesheet" href="../../public/css/default.css">
     <!--JS-->
+    <script src="../../public/js/theme.js"></script>
     <script src="../../public/js/navigation.js"></script>
     <script src="../../public/js/interactions.js"></script>
     <!--ICONS-->
@@ -29,7 +35,15 @@
 </head>
 
 <body>
-
+    <?php
+    if (isset($_COOKIE["theme"])){
+        $themeCookie = $_COOKIE['theme'];
+        
+        if($themeCookie == 'dark'){
+            echo '<script>darkTheme();</script>';
+        }
+    }
+?>
 
     <div class="container">
         <div class="row">
@@ -38,21 +52,33 @@
 
     <!--NAV DESKTOP-->
     <div class="v-nav">
-        <img class="profile-nav-photo" src="../../assets/images/users/profile_photos/user.png"></img>
-        <div class="nav-user">Usuário</div>
+        <img class="profile-nav-photo" src="<?php
+                    if(isset($_SESSION['profile_photo'])){
+                        echo$_SESSION['profile_photo'];
+                    }else{
+                        echo"../../assets/images/users/profile_photos/user.png";
+                    }
+                ?>"></img>
+        <div class="nav-user"><?php
+                    if(isset($_SESSION['name'])){
+                        echo$_SESSION['name'];
+                    }else{
+                        echo"<a href='../../'>Entrar</a> ou <a href='../../views/initial/signup'>Cadastrar</a>";
+                    }
+                ?></div>
         <div class="nav-item-square" onclick="navRed(1)">
             <div>
                 <i data-feather="home" class="v-nav-icon"></i>
                 <div class="v-nav-item-name">Início</div>
             </div>
         </div>
-        <div class="nav-item-square" onclick="navRed(2)">
+        <div class="nav-item-square active-v-nav" onclick="navRed(2)">
             <div>
                 <i data-feather="search" class="v-nav-icon"></i>
                 <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
-        <div class="nav-item-square active-v-nav" onclick="navRed(3)">
+        <div class="nav-item-square " onclick="navRed(3)">
             <div>
                 <center><i data-feather="bell" class="v-nav-icon"></i></center>
                 <div class="v-nav-item-name">Recentes</div>
@@ -79,15 +105,15 @@
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(20)">
                 <div>
-                    <center><i data-feather="search" class="nav-icon"></i></center>
-                    <div class="text-nav">Buscar</div>
+                    <center><i data-feather="message-square" class="nav-icon active-mob"></i></center>
+                    <div class="text-nav active-mob">Chat</div>
                     <!--<div class="chat-notification">10</div>-->
                 </div>
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(3)">
                 <div>
-                    <center><i data-feather="bell" class="nav-icon active-mob"></i></center>
-                    <div class="text-nav active-mob">Recentes</div>
+                    <center><i data-feather="bell" class="nav-icon"></i></center>
+                    <div class="text-nav">Recentes</div>
                 </div>
             </div>
             <div class="md-3 center-x-y height-60" onclick="navRed(4)">
@@ -113,21 +139,10 @@
                 <!--FIM DO MODAL-->
 
                 <script>
-                    feather.replace();
-            //open_modal('modal-welcome')
+                feather.replace();
+                //open_modal('modal-welcome');
                 </script>
-                <script>
-                    var animation = bodymovin.loadAnimation({
-                        // animationData: { /* ... */ },
-                        container: document.getElementById('welcome-lottie'), // required
-                        path: '../../assets/images/ui/lottie/welcome-gears-jobs.json', // required
-                        renderer: 'svg', // required
-                        loop: true, // optional
-                        autoplay: true, // optional
-                        name: "Welcome", // optional
-                    });
-                </script>
-                <script src="../../public/js/theme.js"></script>
+                <script src="../../../public/js/theme.js"></script>
 </body>
 
 </html>

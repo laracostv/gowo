@@ -213,8 +213,8 @@
         </div>
         <div class="nav-item-square" onclick="navRedThird(2)">
             <div>
-                <i data-feather="message-square" class="v-nav-icon"></i>
-                <div class="v-nav-item-name">Chat</div>
+                <i data-feather="search" class="v-nav-icon"></i>
+                <div class="v-nav-item-name">Buscar</div>
             </div>
         </div>
         <div class="nav-item-square" onclick="navRedThird(3)">
@@ -231,9 +231,11 @@
         </div>
         <img class="v-nav-brand" src="../../../../assets/brand/logo-gowo-white-h120.png">
     </div>
+    <!--
     <div class="nav-cart-circle">
         <i data-feather="briefcase" class="nav-cart-circle-icon"></i>
     </div>
+    -->
     <script>
     function order_list_display(id) {
         if (id == 0) {
