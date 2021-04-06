@@ -143,11 +143,12 @@
                             </div>
                         </div>
                     </div>
-                    -->
+                    
 
                     <button style="margin-top: 0px" class="btn-default btn-complete">
                         Contratar este serviço
                     </button>
+                                                                                    -->
                 </div>
             </div>
         </div>
@@ -179,7 +180,8 @@
         </div>
     </div>
     <div class="bottom-spacer"></div>
-    <!--TAKE BAR-->
+                              
+    <!--TAKE BAR
     <div class="container-fluid bottom-take-bar md-show xg-hide lg-hide">
         <button class="btn-default-bottom">
             Contratar agora
@@ -188,7 +190,7 @@
             <i data-feather="plus" class="v-nav-icon"></i>
         </button>
     </div>
-
+-->
     <!--NAV DESKTOP-->
     <div class="v-nav">
         <img class="profile-nav-photo" src="<?php
